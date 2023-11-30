@@ -18,6 +18,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -37,9 +38,10 @@ public class Cliente {
 	private String cpf;
 	private LocalDate nascimento;
 	private String senha;
-	
-	@Column(nullable = true, insertable = false, updatable = false)
-	private String confirmarSenha;
+    private Boolean ativo;
+
+    @Transient
+    private String confirmar_Senha;
 
 	@Enumerated(EnumType.STRING)
 	private Genero genero;
@@ -61,12 +63,13 @@ public class Cliente {
 
 	public Cliente(@Valid DadosCadastroCliente dados) {
 		
+		setAtivo(true);
 		setNome(dados.nome());
 		setCpf(dados.cpf());
 		setGenero(dados.genero());
 		setNascimento(dados.nascimento());
 		setSenha(dados.senha());
-		setConfirmarSenha(dados.confirmarSenha());
+		setConfirmar_Senha(dados.confirmarSenha());
 		setTelefone(dados.telefone());
 		setEmail(dados.email());
 	}
@@ -79,6 +82,14 @@ public class Cliente {
 		this.id = id;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -139,16 +150,16 @@ public class Cliente {
 		this.senha = dados.senha();
 	}
 	
-	public void setConfirmarSenha(DadosCadastroConfirmarSenha senha) {
-		this.confirmarSenha = senha.confirmarSenha();
+	public void setConfirmar_Senha(DadosCadastroConfirmarSenha senha) {
+		this.confirmar_Senha = senha.confirmarSenha();
 	}
 	
 	public void CriptografarSenha(String senhaCriptografada) {
 		this.senha = senhaCriptografada;
 	}
 
-	public String getConfirmarSenha() {
-		return confirmarSenha;
+	public String getConfirmar_Senha() {
+		return confirmar_Senha;
 	}
 	
 	public void setEmail(DadosCadastroEmail dados) {

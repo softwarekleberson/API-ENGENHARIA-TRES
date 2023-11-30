@@ -7,7 +7,7 @@ public class ValidarConfirmacaoSenha extends ValidacaoAbstrataCliente{
 	@Override
 	public String processar(Cliente dominio) {
 		
-		if(!dominio.getSenha().matches(dominio.getConfirmarSenha())) {
+		if(!dominio.getSenha().matches(dominio.getConfirmar_Senha())) {
 			sb.append("Confirme a senha Novamente");
 			return sb.toString();
 		}
