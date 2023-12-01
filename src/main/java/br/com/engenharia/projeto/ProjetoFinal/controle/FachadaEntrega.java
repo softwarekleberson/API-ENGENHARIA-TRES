@@ -11,6 +11,7 @@ import br.com.engenharia.projeto.ProjetoFinal.dao.EntregaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Entrega.implementacao.IStrategyEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Entrega.implementacao.ValidarEnderecoEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
@@ -65,8 +66,9 @@ public class FachadaEntrega implements IfachadaEntrega {
 	}
 
 	@Override
-	public String alterar(Entrega entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Entrega entidade, DadosAtualizacaoEndereco dados) {
+		IdaoEntrega dao = new EntregaDao(repository);
+		dao.alterar(entidade, dados);
 		return null;
 	}
 
@@ -78,7 +80,8 @@ public class FachadaEntrega implements IfachadaEntrega {
 
 	@Override
 	public String excluir(Entrega entidade) {
-		// TODO Auto-generated method stub
+		IdaoEntrega dao = new EntregaDao(repository);
+		dao.inativar(entidade);
 		return null;
 	}
 

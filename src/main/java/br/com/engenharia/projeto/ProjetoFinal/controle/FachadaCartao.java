@@ -11,10 +11,10 @@ import br.com.engenharia.projeto.ProjetoFinal.dao.CartaoDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cartao.implementacao.IStrategyCartao;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cartao.implementacao.ValidarCartao;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
-import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
 public class FachadaCartao implements IfachadaCartao {
 
@@ -65,10 +65,11 @@ public class FachadaCartao implements IfachadaCartao {
 		}
 
 	}
-
+	
 	@Override
-	public String alterar(Cartao entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Cartao entidade, DadosAtualizacaoCartao dados) {
+		IdaoCartao dao = new CartaoDao(repository);
+		dao.alterar(entidade, dados);
 		return null;
 	}
 
@@ -80,7 +81,8 @@ public class FachadaCartao implements IfachadaCartao {
 
 	@Override
 	public String excluir(Cartao entidade) {
-		// TODO Auto-generated method stub
+		IdaoCartao dao = new CartaoDao(repository);
+		dao.inativar(entidade);
 		return null;
 	}
 

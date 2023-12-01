@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
 public class ClienteDao implements IdaoCliente{
@@ -23,8 +24,34 @@ public class ClienteDao implements IdaoCliente{
 	}
 
 	@Override
-	public String alterar(Cliente entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
+		if(dados.genero() != null) {
+			entidade.setGenero(dados.genero());
+		}
+		if(dados.email() != null) {
+			entidade.setEmail(dados.email());
+		}
+		if(dados.nome() != null) {
+			entidade.setNome(dados.nome());
+		}
+		if(dados.nascimento() != null) {
+			entidade.setNascimento(dados.nascimento());
+		}
+		if(dados.email() != null) {
+			entidade.setEmail(dados.email());
+		}
+		if(dados.telefone().ddd() != null) {
+			entidade.getTelefone().setDdd(dados.telefone().ddd());;
+		}
+		if(dados.telefone().telefone() != null) {
+			entidade.getTelefone().setTelefone(dados.telefone());
+		}
+		if(dados.telefone().tipo() != null) {
+			entidade.getTelefone().setTipoTelefone(dados.telefone());
+		}
+		if(dados.senha() != null) {
+			entidade.setSenha(dados.senha());
+		}
 		return null;
 	}
 
@@ -35,26 +62,8 @@ public class ClienteDao implements IdaoCliente{
 	}
 
 	@Override
-	public boolean inativar(Cliente entidade) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String alterarEndercoCobranca(Cliente entidade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String alterarEndercoEntrega(Cliente entidade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String excluir(Cliente entidade) {
-		// TODO Auto-generated method stub
+		entidade.setAtivo(false);
 		return null;
 	}
 

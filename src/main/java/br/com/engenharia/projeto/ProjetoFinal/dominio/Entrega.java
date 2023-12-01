@@ -44,6 +44,8 @@ public class Entrega {
 	@JoinColumn(name = "clientes_id")
 	private Cliente cliente;
 	
+	private boolean ativo;
+	
 	public Entrega(@Valid DadosCadastroEndereco dados) {
 		setClinte(dados.idCliente());
 		setLogradouto(dados.logradouro());
@@ -55,11 +57,20 @@ public class Entrega {
 		setTipoLogradouro(dados);
 		setTipoResidencia(dados);
 		setCidade(dados);
+		setAtivo(true);
 	}
 
 	public void setClinte(Long idCliente) {
 		this.cliente = new Cliente();
 		cliente.setId(idCliente);
+	}
+	
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	public boolean isAtivo() {
+		return ativo;
 	}
 	
 	public String getLogradouro() {

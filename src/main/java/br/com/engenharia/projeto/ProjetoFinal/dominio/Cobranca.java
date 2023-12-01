@@ -43,6 +43,8 @@ public class Cobranca {
 	@JoinColumn(name = "clientes_id")
 	private Cliente cliente;
 	
+	private boolean ativo;
+	
 	
 	public Cobranca(@Valid DadosCadastroEndereco dados) {
 		setClinte(dados.idCliente());
@@ -54,6 +56,7 @@ public class Cobranca {
 		setTipoLogradouro(dados);
 		setTipoResidencia(dados);
 		setCidade(dados);
+		setAtivo(true);
 	}
 
 	public void setClinte(Long idCliente) {
@@ -61,6 +64,14 @@ public class Cobranca {
 		cliente.setId(idCliente);
 	}
 
+	public boolean isAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	public Long getId() {
 		return id;
 	}

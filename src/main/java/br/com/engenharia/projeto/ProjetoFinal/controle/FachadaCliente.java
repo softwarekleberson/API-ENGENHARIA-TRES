@@ -8,7 +8,7 @@ import java.util.Map;
 import br.com.engenharia.projeto.ProjetoFinal.dao.ClienteDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.negocio.Cartao.implementacao.ValidarCartao;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarConfirmacaoSenha;
@@ -18,20 +18,20 @@ import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.Vali
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarTelefone;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
-public class FachadaCliente implements IfachadaCliente{
-	
+public class FachadaCliente implements IfachadaCliente {
+
 	private ClienteRepository repository;
-	
+
 	private Map<String, IdaoCliente> daos;
 	private Map<String, List<IStrategyCliente>> rns;
-	
+
 	public FachadaCliente(ClienteRepository repository) {
-					
+
 		this.repository = repository;
-		
+
 		daos = new HashMap<String, IdaoCliente>();
 		daos.put(Cliente.class.getName(), new ClienteDao(repository));
-		
+
 		rns = new HashMap<String, List<IStrategyCliente>>();
 		ValidarCliente valClinte = new ValidarCliente();
 		ValidarCriptografiaSenha valCriptografia = new ValidarCriptografiaSenha();
@@ -39,7 +39,8 @@ public class FachadaCliente implements IfachadaCliente{
 		ValidarTelefone valTelefone = new ValidarTelefone();
 		ValidarEmail valEmail = new ValidarEmail();
 		ValidarConfirmacaoSenha valConfirmacaoSenha = new ValidarConfirmacaoSenha();
-		
+
+		//Post
 		List<IStrategyCliente> rnsCliente = new ArrayList<IStrategyCliente>();
 		rnsCliente.add(valClinte);
 		rnsCliente.add(valTelefone);
@@ -47,37 +48,39 @@ public class FachadaCliente implements IfachadaCliente{
 		rnsCliente.add(valConfirmacaoSenha);
 		rnsCliente.add(valCriptografia);
 		rnsCliente.add(valEmail);
-		
 		rns.put(Cliente.class.getName(), rnsCliente);
 		
 	}
 
 	public String salvar(Cliente entidade) {
 		String nmClass = entidade.getClass().getName();
-		
+
 		List<IStrategyCliente> rnEntidade = rns.get(nmClass);
 		StringBuilder sb = new StringBuilder();
-		for(IStrategyCliente s: rnEntidade) {
+		for (IStrategyCliente s : rnEntidade) {
 			String msg = s.processar(entidade);
-			if(msg != null) {
+			if (msg != null) {
 				System.out.println(sb.append(msg));
 			}
 		}
-		if(sb.length() > 0) {
+		if (sb.length() > 0) {
 			System.out.println("Erros encontrados" + sb.toString());
 			return sb.toString();
 
-		}else {
+		} else {
 			IdaoCliente dao = daos.get(nmClass);
-			System.out.println("salvei cliente");
+			System.out.println(dao);
 			dao.salvar(entidade);
 			return null;
 		}
-		
+
 	}
 
-	public String alterar(Cliente entidade) {
-		// TODO Auto-generated method stub
+	@Override
+	public String alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
+		
+		IdaoCliente dao = new ClienteDao(repository);
+		dao.alterar(entidade, dados);
 		return null;
 	}
 
@@ -87,7 +90,8 @@ public class FachadaCliente implements IfachadaCliente{
 	}
 
 	public String excluir(Cliente entidade) {
-		// TODO Auto-generated method stub
+		IdaoCliente dao = new ClienteDao(repository);
+		dao.excluir(entidade);
 		return null;
 	}
 }

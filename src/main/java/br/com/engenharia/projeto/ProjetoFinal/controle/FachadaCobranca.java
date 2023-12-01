@@ -11,6 +11,7 @@ import br.com.engenharia.projeto.ProjetoFinal.dao.CobrancaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cobranca.implementacao.IStrategyCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cobranca.implementacao.ValidarEnderecoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
@@ -65,8 +66,9 @@ public class FachadaCobranca implements IfachadaCobranca{
 	}
 
 	@Override
-	public String alterar(Cobranca entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Cobranca entidade, DadosAtualizacaoEndereco dados) {
+		IdaoCobranca dao = new CobrancaDao(repository);
+		dao.alterar(entidade, dados);
 		return null;
 	}
 
@@ -78,7 +80,8 @@ public class FachadaCobranca implements IfachadaCobranca{
 
 	@Override
 	public String excluir(Cobranca entidade) {
-		// TODO Auto-generated method stub
+		IdaoCobranca dao = new CobrancaDao(repository);
+		dao.inativar(entidade);
 		return null;
 	}
 

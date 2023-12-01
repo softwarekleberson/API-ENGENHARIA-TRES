@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
 
 public class CobrancaDao implements IdaoCobranca{
@@ -24,8 +25,22 @@ public class CobrancaDao implements IdaoCobranca{
 	}
 
 	@Override
-	public String alterar(Cobranca entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Cobranca entidade, DadosAtualizacaoEndereco dados) {
+		if(dados.bairro() != null) {
+			entidade.setBairro(dados.bairro());
+		}
+		if(dados.cep() != null) {
+			entidade.setCep(dados.cep());
+		}
+		if(dados.logradouro() != null) {
+			entidade.setLogradouro(dados.logradouro());
+		}
+		if(dados.observacao() != null) {
+			entidade.setObservacao(dados.observacao());
+		}
+		if(dados.numero() != null) {
+			entidade.setNumero(dados.numero());
+		}
 		return null;
 	}
 
@@ -37,7 +52,7 @@ public class CobrancaDao implements IdaoCobranca{
 
 	@Override
 	public boolean inativar(Cobranca entidade) {
-		// TODO Auto-generated method stub
+		repository.delete(entidade);
 		return false;
 	}
 

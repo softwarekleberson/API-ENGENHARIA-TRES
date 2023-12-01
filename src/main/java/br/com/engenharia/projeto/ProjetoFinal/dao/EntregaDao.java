@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
 
 public class EntregaDao implements IdaoEntrega{
@@ -24,8 +25,22 @@ public class EntregaDao implements IdaoEntrega{
 	}
 
 	@Override
-	public String alterar(Entrega entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Entrega entidade, DadosAtualizacaoEndereco dados) {
+		if(dados.bairro() != null) {
+			entidade.setBairro(dados.bairro());
+		}
+		if(dados.cep() != null) {
+			entidade.setCep(dados.cep());
+		}
+		if(dados.logradouro() != null) {
+			entidade.setLogradouto(dados.logradouro());;
+		}
+		if(dados.observacao() != null) {
+			entidade.setObservacao(dados.observacao());
+		}
+		if(dados.numero() != null) {
+			entidade.setNumero(dados.numero());
+		}
 		return null;
 	}
 
@@ -37,7 +52,7 @@ public class EntregaDao implements IdaoEntrega{
 
 	@Override
 	public boolean inativar(Entrega entidade) {
-		// TODO Auto-generated method stub
+		repository.delete(entidade);
 		return false;
 	}
 

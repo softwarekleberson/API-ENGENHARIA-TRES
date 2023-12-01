@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
 
 public class CartaoDao implements IdaoCartao{
@@ -24,11 +25,16 @@ public class CartaoDao implements IdaoCartao{
 	}
 
 	@Override
-	public String alterar(Cartao entidade) {
-		// TODO Auto-generated method stub
+	public String alterar(Cartao entidade, DadosAtualizacaoCartao dados) {
+		if(dados.nomeImpresso() != null) {
+			entidade.setNomeImpresso(dados.nomeImpresso());
+		}
+		if(dados.codigo() != null) {
+			entidade.setCodigo(dados.codigo());
+		}
 		return null;
 	}
-
+	
 	@Override
 	public List<Cliente> consultar(Cartao entidade) {
 		// TODO Auto-generated method stub
@@ -37,12 +43,8 @@ public class CartaoDao implements IdaoCartao{
 
 	@Override
 	public boolean inativar(Cartao entidade) {
-		// TODO Auto-generated method stub
+		repository.delete(entidade);
 		return false;
-	}
-
-	
-
-	
+	}	
 
 }

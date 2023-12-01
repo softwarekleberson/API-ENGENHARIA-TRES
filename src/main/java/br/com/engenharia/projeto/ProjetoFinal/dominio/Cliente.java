@@ -181,5 +181,9 @@ public class Cliente {
 	public void setCobranca(Set<Cobranca> cobranca) {
 		this.cobranca = cobranca;
 	}
+
+	public void excluir() {
+		this.ativo = false;
+	}
 	
 }

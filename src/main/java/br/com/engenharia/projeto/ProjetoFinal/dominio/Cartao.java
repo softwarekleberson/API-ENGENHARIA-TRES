@@ -36,6 +36,7 @@ public class Cartao {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "clientes_id")
 	private Cliente cliente;
+	private boolean ativo;
 	
 	public Cartao(@Valid DadosCadastroCartao dados) {
 		setPrincipal(dados.principal());
@@ -44,8 +45,16 @@ public class Cartao {
 		setNomeImpresso(dados.nomeImpresso());
 		setNumeroCartao(dados.numeroCartao());
 		setCliente(dados.idCliente());
+		setAtivo(true);
 	}
 
+	public boolean isAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 	
 	public void setCliente(Long idClinte) {
 		this.cliente = new Cliente();

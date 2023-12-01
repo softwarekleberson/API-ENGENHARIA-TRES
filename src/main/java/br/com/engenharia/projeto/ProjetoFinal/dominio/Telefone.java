@@ -22,8 +22,8 @@ public class Telefone {
 	
 	public Telefone(DadosCadstroTelefone dados) {
 		setDdd(dados.ddd());
-		setTelefone(dados.telefone());
-		setTipoTelefone(dados.tipo());
+		setTelefone(dados);
+		setTipoTelefone(dados);
 	}
 
 	public String getDdd() {
@@ -38,16 +38,16 @@ public class Telefone {
 		return telefone;
 	}
 	
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setTelefone(DadosCadstroTelefone dadosCadstroTelefone) {
+		this.telefone = dadosCadstroTelefone.telefone();
 	}
 	
 	public TipoTelefone getTipoTelefone() {
 		return tipoTelefone;
 	}
 	
-	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
+	public void setTipoTelefone(DadosCadstroTelefone dadosCadstroTelefone) {
+		this.tipoTelefone = dadosCadstroTelefone.tipo();
 	}
 	
 }

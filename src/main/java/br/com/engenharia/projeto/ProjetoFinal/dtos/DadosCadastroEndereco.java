@@ -1,6 +1,5 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroEndereco(
