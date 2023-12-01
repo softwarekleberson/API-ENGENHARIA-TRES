@@ -14,6 +14,7 @@ import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.Vali
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarConfirmacaoSenha;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarCriptografiaSenha;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarEmail;
+import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarExistencia;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarTelefone;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
@@ -21,7 +22,7 @@ import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 public class FachadaCliente implements IfachadaCliente {
 
 	private ClienteRepository repository;
-
+	
 	private Map<String, IdaoCliente> daos;
 	private Map<String, List<IStrategyCliente>> rns;
 
@@ -39,9 +40,10 @@ public class FachadaCliente implements IfachadaCliente {
 		ValidarTelefone valTelefone = new ValidarTelefone();
 		ValidarEmail valEmail = new ValidarEmail();
 		ValidarConfirmacaoSenha valConfirmacaoSenha = new ValidarConfirmacaoSenha();
-
-		//Post
+		ValidarExistencia valExistencia = new ValidarExistencia(repository);
+		
 		List<IStrategyCliente> rnsCliente = new ArrayList<IStrategyCliente>();
+		rnsCliente.add(valExistencia);
 		rnsCliente.add(valClinte);
 		rnsCliente.add(valTelefone);
 		rnsCliente.add(valSenha);
