@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 
 public interface IdaoCartao {
 

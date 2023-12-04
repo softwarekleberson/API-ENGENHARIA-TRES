@@ -1,6 +1,5 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
-import java.util.List;
 import java.util.Optional;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;

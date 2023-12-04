@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,14 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaEntrega;
+import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.LogRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -33,12 +35,18 @@ public class EntregaController {
 
 	@Autowired
 	private EntregaRepository repository;
+	
+	@Autowired
+	private LogRepository logRepository;
 
 	@PostMapping
 	@Transactional
 	public void cadastrar(@RequestBody @Valid DadosCadastroEndereco dados) {
 		var entregas = new Entrega(dados);
 		new FachadaEntrega(repository).salvar(entregas);
+		
+		var log = new Log(dados.idCliente(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
 	}
 
 	@GetMapping
@@ -57,6 +65,9 @@ public class EntregaController {
 	public void atualizar(@RequestBody @Valid DadosAtualizacaoEndereco dados) {
 		var entrega = repository.getReferenceById(dados.id());
 		new FachadaEntrega(repository).alterar(entrega, dados);
+		
+		var log = new Log(entrega.getId(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
 	}
 
 	@DeleteMapping("/{id}")

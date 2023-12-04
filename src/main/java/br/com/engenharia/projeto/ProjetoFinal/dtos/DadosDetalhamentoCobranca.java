@@ -6,6 +6,7 @@ import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
 public record DadosDetalhamentoCobranca(
 		
 		Long id,
+		Long idCliente,
 		String numero,
 		String bairro,
 		String cep,
@@ -15,7 +16,7 @@ public record DadosDetalhamentoCobranca(
 		) {
 
 	public DadosDetalhamentoCobranca(Cobranca dados) {
-		this(dados.getCliente().getId(), dados.getNumero(), dados.getBairro(),
+		this(dados.getId(), dados.getCliente().getId(), dados.getNumero(), dados.getBairro(),
 			 dados.getCep(), dados.getObservacao(),
 			 dados.getCidade());
 	}

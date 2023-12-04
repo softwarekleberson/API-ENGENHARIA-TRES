@@ -1,6 +1,5 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Genero;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroCliente(
 		

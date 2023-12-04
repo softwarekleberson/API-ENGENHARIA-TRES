@@ -1,12 +1,12 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cidade;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
 
 public record DadosDetalhamentoEntrega(
 		
 		Long id,
+		Long idCliente,
 		String numero,
 		String bairro,
 		String cep,
@@ -16,7 +16,7 @@ public record DadosDetalhamentoEntrega(
 		) {
 
 	public DadosDetalhamentoEntrega(Entrega dados) {
-		this(dados.getCliente().getId(), dados.getNumero(), dados.getBairro(),
+		this(dados.getId(),dados.getCliente().getId(), dados.getNumero(), dados.getBairro(),
 			 dados.getCep(), dados.getObservacao(),
 			 dados.getCidade());
 	}

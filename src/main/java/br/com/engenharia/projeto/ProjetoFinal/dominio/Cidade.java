@@ -3,7 +3,6 @@ package br.com.engenharia.projeto.ProjetoFinal.dominio;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaCartao;
+import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCartao;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.LogRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -33,32 +36,40 @@ public class CartaoController {
 	@Autowired
 	private CartaoRepository repository;
 
+	@Autowired
+	private LogRepository logRepository;
+
 	@PostMapping
 	@Transactional
 	public void cadastrar(@RequestBody @Valid DadosCadastroCartao dados) {
 		var cartao = new Cartao(dados);
 		new FachadaCartao(repository).salvar(cartao);
+
+		var log = new Log(dados.idCliente(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
 	}
 
 	@GetMapping
 	public Page<DadosDetalhamentoCartao> listar(@PageableDefault(size = 10, sort = { "codigo" }) Pageable paginacao) {
 		return repository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoCartao::new);
 	}
-	
+
 	@GetMapping("{clienteId}")
 	public List<DadosDetalhamentoCartao> listarPorCliente(@PathVariable Long clienteId) {
-	    return repository.findAllByClienteIdAndAtivoTrue(clienteId).stream()
-	            .map(DadosDetalhamentoCartao::new)
-	            .collect(Collectors.toList());
+		return repository.findAllByClienteIdAndAtivoTrue(clienteId).stream().map(DadosDetalhamentoCartao::new)
+				.collect(Collectors.toList());
 	}
-	
+
 	@PutMapping
-    @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoCartao dados) {
-        var cartao = repository.getReferenceById(dados.id());
-        new FachadaCartao(repository).alterar(cartao, dados);
-    }
-	
+	@Transactional
+	public void atualizar(@RequestBody @Valid DadosAtualizacaoCartao dados) {
+		var cartao = repository.getReferenceById(dados.id());
+		new FachadaCartao(repository).alterar(cartao, dados);
+
+		var log = new Log(cartao.getCliente().getId(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
+	}
+
 	@DeleteMapping("/{id}")
 	@Transactional
 	public void excluir(@PathVariable Long id) {

@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaCobranca;
+import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
 import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.LogRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -32,23 +36,28 @@ public class CobrancaController {
 	@Autowired
 	private CobrancaRepository repository;
 
+	@Autowired
+	private LogRepository logRepository;
+
 	@PostMapping
 	@Transactional
 	public void cadastrar(@RequestBody @Valid DadosCadastroEndereco dados) {
 		var cobranca = new Cobranca(dados);
 		new FachadaCobranca(repository).salvar(cobranca);
+
+		var log = new Log(dados.idCliente(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
 	}
 
 	@GetMapping
 	public Page<DadosDetalhamentoCobranca> listar(@PageableDefault(size = 10, sort = { "cep" }) Pageable paginacao) {
 		return repository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoCobranca::new);
 	}
-	
+
 	@GetMapping("{clienteId}")
 	public List<DadosDetalhamentoCobranca> listarPorCliente(@PathVariable Long clienteId) {
-	    return repository.findAllByClienteIdAndAtivoTrue(clienteId).stream()
-	            .map(DadosDetalhamentoCobranca::new)
-	            .collect(Collectors.toList());
+		return repository.findAllByClienteIdAndAtivoTrue(clienteId).stream().map(DadosDetalhamentoCobranca::new)
+				.collect(Collectors.toList());
 	}
 
 	@PutMapping
@@ -56,6 +65,9 @@ public class CobrancaController {
 	public void atualizar(@RequestBody @Valid DadosAtualizacaoEndereco dados) {
 		var cobranca = repository.getReferenceById(dados.id());
 		new FachadaCobranca(repository).alterar(cobranca, dados);
+
+		var log = new Log(cobranca.getCliente().getId(), LocalDateTime.now());
+		new LogDao(logRepository).sava(log);
 	}
 
 	@DeleteMapping("/{id}")

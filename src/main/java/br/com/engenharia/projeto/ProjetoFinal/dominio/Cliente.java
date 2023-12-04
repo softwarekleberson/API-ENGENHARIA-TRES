@@ -8,7 +8,6 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroConfirmarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadstroTelefone;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,6 +24,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity(name = "Cliente")
 @Table(name = "clientes")
 @NoArgsConstructor
@@ -61,6 +61,7 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private Set<Cobranca> cobranca;
 
+	
 	public Cliente(@Valid DadosCadastroCliente dados) {
 		
 		setAtivo(true);
