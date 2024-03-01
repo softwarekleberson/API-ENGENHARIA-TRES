@@ -3,7 +3,7 @@ package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 
 public class ValidarCriptografiaSenha implements IStrategyCliente{
 

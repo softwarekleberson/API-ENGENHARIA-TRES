@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCartao;

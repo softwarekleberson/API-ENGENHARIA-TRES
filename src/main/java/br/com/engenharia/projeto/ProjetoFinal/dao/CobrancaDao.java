@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
 

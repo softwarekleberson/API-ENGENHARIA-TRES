@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -23,6 +23,10 @@ public class TipoLogradouro {
 	}
 
 	public void setTipoLogradouro(String tipoLogradouro) {
+		if(tipoLogradouro.isEmpty()) {
+			throw new IllegalArgumentException("Tipo logradouro não deve ser nulo");
+		}
+		
 		this.tipoLogradouro = tipoLogradouro;
 	}
 

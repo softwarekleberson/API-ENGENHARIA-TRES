@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embedded;

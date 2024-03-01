@@ -1,4 +1,6 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+
+import java.util.Objects;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embedded;
@@ -78,6 +80,10 @@ public class Entrega {
 	}
 
 	public void setLogradouto(String logradouro) {
+		if(logradouro.isEmpty()) {
+			throw new IllegalArgumentException("Logradouro não deve ser nulo");
+		}
+		
 		this.logradouro = logradouro;
 	}
 
@@ -86,6 +92,10 @@ public class Entrega {
 	}
 
 	public void setNumero(String numero) {
+		if(numero.isEmpty()) {
+			throw new IllegalArgumentException("Numero não deve ser nulo");
+		}
+		
 		this.numero = numero;
 	}
 
@@ -94,6 +104,9 @@ public class Entrega {
 	}
 
 	public void setBairro(String bairro) {
+		if(bairro.isEmpty()) {
+			throw new IllegalArgumentException("Bairro não deve ser nulo");
+		}
 		this.bairro = bairro;
 	}
 
@@ -102,6 +115,11 @@ public class Entrega {
 	}
 
 	public void setCep(String cep) {
+		String padrao = "\\d{5}|\\d{8}|\\d{9}";
+	    if(!cep.matches(padrao)) {
+	       throw new IllegalArgumentException("Cep deve conter 5, 8 ou 9 digitos");
+	    }
+	    
 		this.cep = cep;
 	}
 
@@ -118,6 +136,9 @@ public class Entrega {
 	}
 	
 	public void setFraseEntrega(String fraseEntrega) {
+		if(fraseEntrega.isEmpty()) {
+			throw new IllegalArgumentException("Frase de entrega não deve ser nulo");
+		}
 		this.fraseEntrega = fraseEntrega;
 	}
 	
@@ -142,7 +163,6 @@ public class Entrega {
 	}
 
 	public void setCidade(DadosCadastroEndereco dados) {
-		System.out.println(dados.cidade());
 		this.cidade = new Cidade(dados);
 	}
 	

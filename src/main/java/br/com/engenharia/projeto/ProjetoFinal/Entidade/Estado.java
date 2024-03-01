@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -32,6 +32,9 @@ public class Estado{
 	}
 	
 	public void setEstado(String estado) {
+		if(estado.isEmpty()) {
+			throw new IllegalArgumentException("Estado não deve ser nulo");
+		}
 		this.estado = estado;
 	}
 	

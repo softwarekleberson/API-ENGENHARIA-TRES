@@ -1,7 +1,7 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Telefone;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Telefone;
 
 public class ValidarTelefone extends ValidacaoAbstrataCliente{
 

@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -23,7 +23,10 @@ public class Pais {
 	}
 
 	public void setPais(DadosCadastroEndereco dados) {
-		System.out.println(dados.pais());
+		if(dados.pais().isEmpty()) {
+			throw new IllegalArgumentException("Pais não deve ser nulo");
+		}
+		
 		this.pais = dados.pais();
 	}
 

@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.Entity;

@@ -3,8 +3,9 @@ package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dao.ClienteDao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
 public class ValidarExistencia extends ValidacaoAbstrataCliente{

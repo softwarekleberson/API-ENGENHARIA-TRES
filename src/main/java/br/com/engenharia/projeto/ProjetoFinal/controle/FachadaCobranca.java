@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dao.CobrancaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoCobranca;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cobranca.implementacao.IStrategyCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Cobranca.implementacao.ValidarEnderecoCobranca;

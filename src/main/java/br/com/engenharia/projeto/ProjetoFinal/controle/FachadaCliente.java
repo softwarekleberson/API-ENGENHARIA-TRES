@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dao.ClienteDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoCliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.ValidarCliente;

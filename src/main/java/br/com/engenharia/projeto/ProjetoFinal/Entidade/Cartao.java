@@ -1,4 +1,6 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+
+import java.util.Objects;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import jakarta.persistence.Entity;
@@ -26,8 +28,13 @@ public class Cartao {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private boolean principal = false;
+	
 	private String nomeImpresso;
+	
+	public static final int CODIGO_CARTAO_CREDITO = 3;
 	private String codigo;
+	
+	public static final int NUMERO_CARTAO_CARTAO = 16;
 	private String numeroCartao;
 	
 	@Enumerated(EnumType.STRING)
@@ -66,7 +73,6 @@ public class Cartao {
 	}
 	
 	public void setPrincipal(boolean principal) {
-		System.out.println(principal);
 		this.principal = principal;
 	}
 	
@@ -75,13 +81,24 @@ public class Cartao {
 	}
 	
 	public void setNomeImpresso(String nomeImpresso) {
+		String verificarNomeImpresso = Objects.requireNonNull(nomeImpresso,"Nome impresso não deve ser nulo");
+		if(verificarNomeImpresso.isEmpty()) {
+			throw new IllegalArgumentException("Nome deve estar presente");
+		}
+		
 		this.nomeImpresso = nomeImpresso;
 	}
 	
 	public String getCodigo() {
 		return codigo;
 	}
+	
 	public void setCodigo(String codigo) {
+		String verificarCodigo = Objects.requireNonNull(codigo, "Codigo deve conter 3 digitos");
+		if(verificarCodigo.length() != CODIGO_CARTAO_CREDITO) {
+			throw new IllegalArgumentException("Codigo do cartão deve possuir 3 digitos");
+		}
+		
 		this.codigo = codigo;
 	}
 	
@@ -90,7 +107,6 @@ public class Cartao {
 	}
 	
 	public void setBandeira(Bandeira bandeira) {
-		System.out.println(bandeira);
 		this.bandeira = bandeira;
 	}
 	
@@ -99,6 +115,11 @@ public class Cartao {
 	}
 	
 	public void setNumeroCartao(String numeroCartao) {
+		String verificaNumeroCartao = Objects.requireNonNull(numeroCartao, "Numero do cartão do credito deve conter 16 digitos");
+		if(verificaNumeroCartao.length() != NUMERO_CARTAO_CARTAO) {
+			throw new IllegalArgumentException("Cartão de credito deve conter 16 digitos");
+		}
+		
 		this.numeroCartao = numeroCartao;
 	}
 	

@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -23,6 +23,9 @@ public class TipoResidencia {
 	}
 
 	public void setTipoResidencia(String tipoResidencia) {
+		if(tipoResidencia.isEmpty()) {
+			throw new IllegalArgumentException("Tipo residencia não deve ser nulo");
+		}
 		this.tipoResidencia = tipoResidencia;
 	}
 

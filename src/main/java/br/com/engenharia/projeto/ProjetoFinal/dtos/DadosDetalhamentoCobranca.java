@@ -1,7 +1,7 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cidade;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cidade;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cobranca;
 
 public record DadosDetalhamentoCobranca(
 		

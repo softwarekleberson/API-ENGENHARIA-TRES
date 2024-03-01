@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Entrega;
 import br.com.engenharia.projeto.ProjetoFinal.dao.EntregaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.IdaoEntrega;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Entrega.implementacao.IStrategyEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.Entrega.implementacao.ValidarEnderecoEntrega;

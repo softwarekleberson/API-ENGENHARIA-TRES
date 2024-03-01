@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -31,6 +31,9 @@ public class Cidade {
 	}
 	
 	public void setCidade(String cidade) {
+		if(cidade.isEmpty()) {
+			throw new IllegalArgumentException("Nome da cidade não deve ser nulo");
+		}
 		this.cidade = cidade;
 	}
 	
@@ -38,7 +41,6 @@ public class Cidade {
 		return estado;
 	}
 	public void setEstado(DadosCadastroEndereco dados) {
-		System.out.println(dados.estado());
 		this.estado = new Estado(dados);
 	}
 	

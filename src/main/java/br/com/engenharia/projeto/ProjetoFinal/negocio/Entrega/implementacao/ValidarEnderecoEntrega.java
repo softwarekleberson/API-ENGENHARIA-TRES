@@ -1,6 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.Entrega.implementacao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Entrega;
 
 public class ValidarEnderecoEntrega extends ValidacaoAbstrataEntrega {
 

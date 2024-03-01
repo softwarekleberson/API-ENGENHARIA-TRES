@@ -2,8 +2,8 @@ package br.com.engenharia.projeto.ProjetoFinal.dao;
 
 import java.util.List;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 
 public interface IdaoCartao {

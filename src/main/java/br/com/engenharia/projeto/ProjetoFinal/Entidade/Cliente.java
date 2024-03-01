@@ -1,6 +1,7 @@
-package br.com.engenharia.projeto.ProjetoFinal.dominio;
+package br.com.engenharia.projeto.ProjetoFinal.Entidade;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
@@ -35,7 +36,10 @@ public class Cliente {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private String nome;
+	
+	public static final int VERICA_CPF = 11;
 	private String cpf;
+	
 	private LocalDate nascimento;
 	private String senha;
     private Boolean ativo;
@@ -96,6 +100,11 @@ public class Cliente {
 	}
 
 	public void setNome(String nome) {
+		String verificaNome = Objects.requireNonNull(nome, "Nome não deve ser nulo");
+		if(verificaNome.isEmpty()) {
+			throw new IllegalArgumentException("Nome não deve ser nulo");
+		}
+		
 		this.nome = nome;
 	}
 
@@ -104,6 +113,11 @@ public class Cliente {
 	}
 
 	public void setCpf(String cpf) {
+		String verificaCpf = Objects.requireNonNull(cpf, "Cpf deve conter 11 digitos");
+		if(verificaCpf.length() != VERICA_CPF) {
+			throw new IllegalArgumentException("Cpf deve conter 11 digitos");
+		}
+		
 		this.cpf = cpf;
 	}
 

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;

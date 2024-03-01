@@ -2,7 +2,7 @@ package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
 import java.time.LocalDate;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Genero;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Genero;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 

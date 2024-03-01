@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 

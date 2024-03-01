@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
 import br.com.engenharia.projeto.ProjetoFinal.controle.FachadaEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoEntrega;

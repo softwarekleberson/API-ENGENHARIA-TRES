@@ -1,6 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Log;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
 
 public interface IdaoLog {
 

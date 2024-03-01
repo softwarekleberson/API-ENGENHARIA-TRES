@@ -1,6 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.Cartao.implementacao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cartao;
 
 public class ValidarCartao extends ValidacaoAbstrataCartao{
 

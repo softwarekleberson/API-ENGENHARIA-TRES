@@ -2,8 +2,8 @@ package br.com.engenharia.projeto.ProjetoFinal.dao;
 
 import java.util.List;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Entrega;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 
 public interface IdaoEntrega {

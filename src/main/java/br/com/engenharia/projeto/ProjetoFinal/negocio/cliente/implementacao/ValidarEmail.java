@@ -1,6 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 
 public class ValidarEmail extends ValidacaoAbstrataCliente{
 	

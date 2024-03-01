@@ -2,7 +2,8 @@ package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import br.com.engenharia.projeto.ProjetoFinal.dominio.Cliente;
+
+import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 
 public class ValidarSenha extends ValidacaoAbstrataCliente{
 
