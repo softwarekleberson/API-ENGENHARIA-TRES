@@ -1,5 +1,6 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
@@ -26,15 +27,15 @@ public class Email {
 		return email;
 	}
 	
-	public void setEmail(String email) {
-		String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-	      if (!Pattern.matches(regex, email)) {
-	    	  throw new IllegalArgumentException("O endereço de e-mail fornecido"
-	    	  								   + " é inválido. Por favor, verifique"
-	    	  								   + " e tente novamente.");
-	      }
-	      
+	public void setEmail(String email) { 
+		 String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+		 Pattern pattern = Pattern.compile(regex);
+		 Matcher matcher = pattern.matcher(email);
+		 
+		 if (!matcher.matches()) {
+		        throw new IllegalArgumentException("Formato de email inválido");
+		    }
+		 
 		this.email = email;
 	}
-	
 }

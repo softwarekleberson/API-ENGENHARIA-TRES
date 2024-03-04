@@ -3,11 +3,13 @@ package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dao.ClienteDao;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
+@Service
 public class ValidarExistencia extends ValidacaoAbstrataCliente{
 
 	@Autowired
@@ -23,11 +25,9 @@ public class ValidarExistencia extends ValidacaoAbstrataCliente{
 		Optional<Cliente> cliente = clienteDao.consultar(dominio);
 		
 		if(!cliente.isEmpty()) {
-			sb.append("cliente cadastrado anteriormente");
-			return sb.toString();
+			throw new IllegalArgumentException("Cpf cadastrado anteriormente");
 		}
 		
 		return null;
 	}
-
 }

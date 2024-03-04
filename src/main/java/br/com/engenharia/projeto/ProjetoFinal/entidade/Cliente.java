@@ -1,14 +1,16 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroConfirmarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroSenha;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadstroTelefone;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroTelefone;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -35,6 +37,8 @@ public class Cliente {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
+	public static final int VERIFICA_NOME = 2;
 	private String nome;
 	
 	public static final int VERICA_CPF = 11;
@@ -77,6 +81,8 @@ public class Cliente {
 		setConfirmar_Senha(dados.confirmarSenha());
 		setTelefone(dados.telefone());
 		setEmail(dados.email());
+		setEntrega(dados.entrega());
+		setCobranca(dados.cobranca());
 	}
 	
 	public Long getId() {
@@ -100,11 +106,9 @@ public class Cliente {
 	}
 
 	public void setNome(String nome) {
-		String verificaNome = Objects.requireNonNull(nome, "Nome não deve ser nulo");
-		if(verificaNome.isEmpty()) {
-			throw new IllegalArgumentException("Nome não deve ser nulo");
+		if(nome == null || nome.trim().length() < VERIFICA_NOME) {
+			throw new IllegalArgumentException("Nome deve possuir mais de 2 digitos");
 		}
-		
 		this.nome = nome;
 	}
 
@@ -113,11 +117,9 @@ public class Cliente {
 	}
 
 	public void setCpf(String cpf) {
-		String verificaCpf = Objects.requireNonNull(cpf, "Cpf deve conter 11 digitos");
-		if(verificaCpf.length() != VERICA_CPF) {
-			throw new IllegalArgumentException("Cpf deve conter 11 digitos");
+		if(cpf == null || cpf.trim().length() != VERICA_CPF) {
+			throw new IllegalArgumentException("Cpf deve conter apenas numeros");
 		}
-		
 		this.cpf = cpf;
 	}
 
@@ -141,7 +143,7 @@ public class Cliente {
 		return telefone;
 	}
 
-	public void setTelefone(DadosCadstroTelefone dados) {
+	public void setTelefone(DadosCadastroTelefone dados) {
 		this.telefone = new Telefone(dados);
 	}
 	
@@ -185,20 +187,31 @@ public class Cliente {
 		return entrega;
 	}
 
-	public void setEntrega(Set<Entrega> entrega) {
-		this.entrega = entrega;
+	public void setEntrega(Set<DadosCadastroEntrega> entregas) {
+	    this.entrega = entregas.stream()
+	                            .map(entrega -> new Entrega(entrega)) // Convertendo DadosCadastroEntrega para Entrega
+	                            .collect(Collectors.toSet());
 	}
 
 	public Set<Cobranca> getCobranca() {
 		return cobranca;
 	}
 
-	public void setCobranca(Set<Cobranca> cobranca) {
-		this.cobranca = cobranca;
+	public void setCobranca(Set<DadosCadastroEndereco> cobrancas) {
+	    this.cobranca = cobrancas.stream()
+	                              .map(cobranca -> new Cobranca(cobranca)) // Convertendo DadosCadastroEndereco para Cobranca
+	                              .collect(Collectors.toSet());
 	}
 
 	public void excluir() {
 		this.ativo = false;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", nascimento=" + nascimento + ", senha="
+				+ senha + ", ativo=" + ativo + ", confirmar_Senha=" + confirmar_Senha + ", genero=" + genero
+				+ ", telefone=" + telefone + ", cartoes=" + cartoes + ", email=" + email + ", entrega=" + entrega
+				+ ", cobranca=" + cobranca + "]";
+	}
 }

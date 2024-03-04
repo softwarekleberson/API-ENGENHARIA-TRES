@@ -1,8 +1,6 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
-import java.util.Objects;
-
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadstroTelefone;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroTelefone;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,13 +17,12 @@ public class Telefone {
 	public static final int VERIFICA_DDD = 2;
 	private String ddd;
 	
-	
 	private String telefone;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoTelefone tipoTelefone;
 	
-	public Telefone(DadosCadstroTelefone dados) {
+	public Telefone(DadosCadastroTelefone dados) {
 		setDdd(dados.ddd());
 		setTelefone(dados);
 		setTipoTelefone(dados);
@@ -36,9 +33,9 @@ public class Telefone {
 	}
 	
 	public void setDdd(String ddd) {
-		String verificaDdd = Objects.requireNonNull(ddd, "Ddd deve conter 2 digitos");
-		if(verificaDdd.length() != VERIFICA_DDD) {
-			throw new IllegalArgumentException("Ddd deve conter 2 digitos");
+		String regexDDD = "\\d{2}";
+		if(!ddd.matches(regexDDD)) {
+			throw new IllegalArgumentException("Ddd deve posusir 2 digitos");
 		}
 		this.ddd = ddd;
 	}
@@ -47,12 +44,11 @@ public class Telefone {
 		return telefone;
 	}
 	
-	public void setTelefone(DadosCadstroTelefone dadosCadstroTelefone) {
-		String verifica_telefone = dadosCadstroTelefone.telefone();
-		if(verifica_telefone.length() != 8 || verifica_telefone.length() != 9) {
-			throw new IllegalArgumentException("Telefone deve conter 8 ou 9 digitos");
-		}
-		
+	public void setTelefone(DadosCadastroTelefone dadosCadstroTelefone) {
+        String regexTelefone = "\\d{8,9}";
+        if(!dadosCadstroTelefone.telefone().matches(regexTelefone)) {
+        	throw new IllegalArgumentException("Telefone deve conter 8 ou 9 digitos");
+        }
 		this.telefone = dadosCadstroTelefone.telefone();
 	}
 	
@@ -60,7 +56,7 @@ public class Telefone {
 		return tipoTelefone;
 	}
 	
-	public void setTipoTelefone(DadosCadstroTelefone dadosCadstroTelefone) {
+	public void setTipoTelefone(DadosCadastroTelefone dadosCadstroTelefone) {
 		this.tipoTelefone = dadosCadstroTelefone.tipo();
 	}
 	

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.util.Streamable;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
 
 public interface CartaoRepository extends JpaRepository<Cartao, Long>{
 

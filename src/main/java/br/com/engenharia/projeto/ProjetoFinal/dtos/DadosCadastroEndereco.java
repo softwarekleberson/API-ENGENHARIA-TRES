@@ -1,11 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import jakarta.validation.constraints.NotNull;
-
 public record DadosCadastroEndereco(
-		
-		@NotNull
-		Long idCliente,
 		
 		String tipoResidencia,
 		

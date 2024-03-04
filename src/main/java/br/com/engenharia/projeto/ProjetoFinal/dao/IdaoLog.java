@@ -1,9 +1,9 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Log;
 
 public interface IdaoLog {
 
-	public String sava(Log entidade);
+	public String save(Log entidade);
 		
 }

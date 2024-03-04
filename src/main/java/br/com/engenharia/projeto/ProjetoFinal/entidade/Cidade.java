@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -31,9 +31,10 @@ public class Cidade {
 	}
 	
 	public void setCidade(String cidade) {
-		if(cidade.isEmpty()) {
-			throw new IllegalArgumentException("Nome da cidade não deve ser nulo");
-		}
+		 if (cidade == null || cidade.trim().isEmpty()) {
+		        throw new IllegalArgumentException("Cidade não deve ser nulo ou vazio");
+		 }
+		
 		this.cidade = cidade;
 	}
 	

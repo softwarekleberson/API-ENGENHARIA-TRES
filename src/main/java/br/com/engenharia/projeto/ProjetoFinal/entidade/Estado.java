@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
@@ -32,7 +32,7 @@ public class Estado{
 	}
 	
 	public void setEstado(String estado) {
-		if(estado.isEmpty()) {
+		if(estado == null || estado.trim().length() == 0) {
 			throw new IllegalArgumentException("Estado não deve ser nulo");
 		}
 		this.estado = estado;
@@ -43,6 +43,9 @@ public class Estado{
 	}
 	
 	public void setPais(DadosCadastroEndereco dados) {
+		if(dados.pais() == null || dados.pais().trim().length() == 0) {
+			throw new IllegalArgumentException("Pais não deve ser nulo");
+		}
 		this.pais = new Pais(dados);
 	}
 	

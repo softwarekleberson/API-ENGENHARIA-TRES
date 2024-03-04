@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
@@ -23,9 +23,9 @@ public class Log {
 	private Long idCliente;
 	private LocalDateTime dataHora;
 	
-	public Log(Long idCliente, LocalDateTime localDateTime) {
+	public Log(Long idCliente) {
 		this.idCliente = idCliente;
-		this.dataHora = LocalDateTime.now();
+		setDataHora(LocalDateTime.now());
 	}
 	
 	public Long getId() {

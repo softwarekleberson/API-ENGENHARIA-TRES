@@ -1,18 +1,19 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import org.springframework.stereotype.Service;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.infra.TratadorErros.ValidacaoExcepetion;
 
+@Service
 public class ValidarConfirmacaoSenha extends ValidacaoAbstrataCliente{
 
 	@Override
-	public String processar(Cliente dominio) {
+	public String processar(Cliente dominio) throws ValidacaoExcepetion {
 		
 		if(!dominio.getSenha().matches(dominio.getConfirmar_Senha())) {
-			sb.append("Confirme a senha Novamente");
-			return sb.toString();
+			throw new ValidacaoExcepetion("senha não bate com confirmar senha");
 		}
 		
 		 return null;		
 	}
-
 }

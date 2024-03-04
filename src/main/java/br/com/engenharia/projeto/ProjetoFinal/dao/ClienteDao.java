@@ -3,11 +3,13 @@ package br.com.engenharia.projeto.ProjetoFinal.dao;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
+@Service
 public class ClienteDao implements IdaoCliente {
 
 	@Autowired
@@ -25,9 +27,7 @@ public class ClienteDao implements IdaoCliente {
 
 	@Override
 	public String alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
-		if (dados.genero() != null) {
-			entidade.setGenero(dados.genero());
-		}
+		
 		if (dados.email() != null) {
 			entidade.setEmail(dados.email());
 		}

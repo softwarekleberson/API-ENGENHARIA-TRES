@@ -1,7 +1,7 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Bandeira;
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cartao;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Bandeira;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
 
 public record DadosDetalhamentoCartao(
 		

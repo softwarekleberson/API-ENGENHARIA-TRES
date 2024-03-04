@@ -3,8 +3,10 @@ package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
+import org.springframework.stereotype.Service;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 
+@Service
 public class ValidarSenha extends ValidacaoAbstrataCliente{
 
 	public String processar(Cliente dominio) {
@@ -19,15 +21,9 @@ public class ValidarSenha extends ValidacaoAbstrataCliente{
 	    Matcher matcher = regex.matcher(dominio.getSenha());
 		
 	    if (!matcher.matches()) {
-            sb.append("Senha não aceita");
-            System.out.println("Senha não aceita");
+	    	throw new IllegalArgumentException("Senha não corresponde ao aceitavel");
         } 
 	    
-	    if(sb.length() != 0) {
-			return sb.toString();
-		}
-		
 		return null;
 	}
-
 }

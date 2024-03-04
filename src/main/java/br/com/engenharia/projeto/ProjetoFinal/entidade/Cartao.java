@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.Entidade;
+package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import java.util.Objects;
 
@@ -81,11 +81,9 @@ public class Cartao {
 	}
 	
 	public void setNomeImpresso(String nomeImpresso) {
-		String verificarNomeImpresso = Objects.requireNonNull(nomeImpresso,"Nome impresso não deve ser nulo");
-		if(verificarNomeImpresso.isEmpty()) {
-			throw new IllegalArgumentException("Nome deve estar presente");
+		if(nomeImpresso == null || nomeImpresso.trim().isEmpty()) {
+			throw new IllegalArgumentException("Nome deve possuir mais de 2 digitos");
 		}
-		
 		this.nomeImpresso = nomeImpresso;
 	}
 	
@@ -94,11 +92,9 @@ public class Cartao {
 	}
 	
 	public void setCodigo(String codigo) {
-		String verificarCodigo = Objects.requireNonNull(codigo, "Codigo deve conter 3 digitos");
-		if(verificarCodigo.length() != CODIGO_CARTAO_CREDITO) {
-			throw new IllegalArgumentException("Codigo do cartão deve possuir 3 digitos");
+		if(codigo == null || codigo.trim().length() != CODIGO_CARTAO_CREDITO) {
+			throw new IllegalArgumentException("Codigo do cartão deve ter 3 digitos");
 		}
-		
 		this.codigo = codigo;
 	}
 	
@@ -115,13 +111,9 @@ public class Cartao {
 	}
 	
 	public void setNumeroCartao(String numeroCartao) {
-		String verificaNumeroCartao = Objects.requireNonNull(numeroCartao, "Numero do cartão do credito deve conter 16 digitos");
-		if(verificaNumeroCartao.length() != NUMERO_CARTAO_CARTAO) {
-			throw new IllegalArgumentException("Cartão de credito deve conter 16 digitos");
+		if(numeroCartao == null || numeroCartao.trim().length() != NUMERO_CARTAO_CARTAO) {
+			throw new IllegalArgumentException("Codigo do cartão deve possuir 16 digitos");
 		}
-		
 		this.numeroCartao = numeroCartao;
 	}
-	
 }
-

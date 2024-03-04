@@ -1,10 +1,12 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Log;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Log;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.LogRepository;
 
+@Service
 public class LogDao implements IdaoLog {
 
 	@Autowired
@@ -15,8 +17,8 @@ public class LogDao implements IdaoLog {
 	}
 	
 	@Override
-	public String sava(Log entidade) {
-		logRepository.save(entidade);
+	public String save(Log entidade) {
+		
 		return null;
 	}
 

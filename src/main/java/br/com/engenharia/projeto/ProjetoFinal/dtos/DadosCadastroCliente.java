@@ -1,33 +1,36 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
 import java.time.LocalDate;
+import java.util.Set;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Genero;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Genero;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroCliente(
 		
-		Genero genero,
+		@NotNull Genero genero,
 		
-		String nome,
+		@NotBlank String nome,
 		
-		LocalDate nascimento,
+		@NotNull LocalDate nascimento,
 		
 		@NotBlank
 		String cpf,
 		
 		@Valid DadosCadastroEmail email,
 		
-		@Valid DadosCadstroTelefone telefone,
+		@Valid DadosCadastroTelefone telefone,
 		
 		@Valid DadosCadastroSenha senha,
 		
-		@Valid DadosCadastroConfirmarSenha confirmarSenha
+		@Valid DadosCadastroConfirmarSenha confirmarSenha,
 
+		@Valid @NotNull Set<DadosCadastroEntrega> entrega,
 		
-										) 
+		@Valid @NotNull Set<DadosCadastroEndereco> cobranca
+																	) 
 
-										{
-
+																	{
 }

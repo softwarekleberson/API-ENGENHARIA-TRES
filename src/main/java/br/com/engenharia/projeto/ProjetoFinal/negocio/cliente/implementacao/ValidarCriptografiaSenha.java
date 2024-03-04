@@ -1,10 +1,10 @@
 package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
 
-
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.springframework.stereotype.Service;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.Cliente;
-
+@Service
 public class ValidarCriptografiaSenha implements IStrategyCliente{
 
 	public String processar(Cliente dominio) {
@@ -15,5 +15,4 @@ public class ValidarCriptografiaSenha implements IStrategyCliente{
 	    
 	    return null;
 	}
-
 }

@@ -1,8 +1,8 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import br.com.engenharia.projeto.ProjetoFinal.Entidade.TipoTelefone;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.TipoTelefone;
 
-public record DadosCadstroTelefone(
+public record DadosCadastroTelefone(
 		
 		String ddd,
 		String telefone,
