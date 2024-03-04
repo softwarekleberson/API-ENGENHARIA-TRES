@@ -20,13 +20,12 @@ public class ClienteDao implements IdaoCliente {
 	}
 
 	@Override
-	public String salvar(Cliente entidade) {
+	public void salvar(Cliente entidade) {
 		this.repository.save(entidade);
-		return null;
 	}
 
 	@Override
-	public String alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
+	public void alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
 		
 		if (dados.email() != null) {
 			entidade.setEmail(dados.email());
@@ -53,7 +52,6 @@ public class ClienteDao implements IdaoCliente {
 		if (dados.senha() != null) {
 			entidade.setSenha(dados.senha());
 		}
-		return null;
 	}
 
 	@Override
@@ -69,9 +67,7 @@ public class ClienteDao implements IdaoCliente {
 	}
 
 	@Override
-	public String excluir(Cliente entidade) {
+	public void excluir(Cliente entidade) {
 		entidade.setAtivo(false);
-		return null;
 	}
-
 }

@@ -7,9 +7,8 @@ import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 
 public interface IdaoCliente {
 
-	public String salvar(Cliente entidade);
-	public String alterar(Cliente entidade, DadosAtualizacaoCliente dados);
+	public void salvar(Cliente entidade);
+	public void alterar(Cliente entidade, DadosAtualizacaoCliente dados);
 	public Optional<Cliente> consultar(Cliente entidade);
-	public String excluir(Cliente entidade);
-	
+	public void excluir(Cliente entidade);
 }

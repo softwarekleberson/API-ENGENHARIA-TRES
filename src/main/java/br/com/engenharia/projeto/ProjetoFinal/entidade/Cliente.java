@@ -106,7 +106,7 @@ public class Cliente {
 	}
 
 	public void setNome(String nome) {
-		if(nome == null || nome.trim().length() < VERIFICA_NOME) {
+		if(nome == null || nome.trim().length() <= VERIFICA_NOME) {
 			throw new IllegalArgumentException("Nome deve possuir mais de 2 digitos");
 		}
 		this.nome = nome;

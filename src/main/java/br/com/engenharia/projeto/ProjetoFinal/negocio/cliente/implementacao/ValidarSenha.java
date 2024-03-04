@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 
 @Service
-public class ValidarSenha extends ValidacaoAbstrataCliente{
+public class ValidarSenha extends ValidacaoAbstrataCliente {
 
-	public String processar(Cliente dominio) {
-				
-		if(dominio.getSenha().trim().length() < 8) {
-			sb.append("Deve conter no minimo 8 caracteres");
-			System.out.println("Deve conter no minimo 8 caracteres");
-		}
-		
-		String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>?]).*$";
-	    Pattern regex = Pattern.compile(pattern);
-	    Matcher matcher = regex.matcher(dominio.getSenha());
-		
-	    if (!matcher.matches()) {
-	    	throw new IllegalArgumentException("Senha não corresponde ao aceitavel");
-        } 
-	    
-		return null;
-	}
+    public String processar(Cliente dominio) {
+        String senha = dominio.getSenha();
+        System.out.println(senha);
+        if (senha.length() < 8) {
+            throw new IllegalArgumentException("Senha deve ter no mínimo 8 caracteres");
+        }
+
+        String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>?]).*$";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(senha);
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial");
+        }
+
+        return null;
+    }
 }
