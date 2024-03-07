@@ -15,12 +15,10 @@ public class LogDao implements IdaoLog {
 	public LogDao(LogRepository logRepository) {
 		this.logRepository = logRepository;
 	}
-	
+
 	@Override
 	public String save(Log entidade) {
-		
+		this.logRepository.save(entidade);
 		return null;
 	}
-
-	
 }

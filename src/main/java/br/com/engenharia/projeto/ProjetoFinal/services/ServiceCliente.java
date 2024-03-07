@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import br.com.engenharia.projeto.ProjetoFinal.dao.ClienteDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.CobrancaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.EntregaDao;
+import br.com.engenharia.projeto.ProjetoFinal.dao.LogDao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DetalharCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Entrega;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Log;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCliente;
 import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCriptografaSenha;
 import jakarta.validation.Valid;
@@ -30,6 +32,9 @@ public class ServiceCliente {
 
     @Autowired
     private CobrancaDao daoCobranca;
+    
+    @Autowired
+    private LogDao daoLog;
 
     @Autowired
     private List<IStrategyCliente> validadores;
@@ -38,19 +43,22 @@ public class ServiceCliente {
     private List<IStrategyCriptografaSenha> criptografaSenha;
 
     public DetalharCliente criar(@Valid DadosCadastroCliente dados) {
-        Cliente cliente = new Cliente(dados);
+        
+    	Cliente cliente = new Cliente(dados);
         validadores.forEach(v -> v.processar(cliente));
         criptografaSenha.forEach(v -> v.processar(cliente));
         daoCliente.salvar(cliente);
 
         Set<Cobranca> cobrancas = criarCobrancas(dados, cliente);
         Set<Entrega> entregas = criarEntregas(dados, cliente);
-
         atribuirIdCliente(cobrancas, entregas, cliente.getId());
 
         salvarCobrancas(cobrancas);
         salvarEntregas(entregas);
-
+        
+        Log log = new Log(cliente.getId());
+        daoLog.save(log);
+        
         return new DetalharCliente(cliente);
     }
 
