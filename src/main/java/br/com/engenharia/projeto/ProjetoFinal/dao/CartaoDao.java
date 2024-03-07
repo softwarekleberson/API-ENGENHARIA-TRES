@@ -1,6 +1,7 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
+import jakarta.validation.ValidationException;
 
 @Service
 public class CartaoDao implements IdaoCartao{
@@ -26,14 +28,24 @@ public class CartaoDao implements IdaoCartao{
 		return null;
 	}
 
-	@Override
-	public String alterar(Cartao entidade, DadosAtualizacaoCartao dados) {
-		if(dados.nomeImpresso() != null) {
-			entidade.setNomeImpresso(dados.nomeImpresso());
-		}
-		if(dados.codigo() != null) {
-			entidade.setCodigo(dados.codigo());
-		}
+	public Cartao alterar(Long idCartao, DadosAtualizacaoCartao dados) {
+		Optional<Cartao> opDataBaseCartao = repository.findById(idCartao);
+		
+		if(opDataBaseCartao.isPresent()) {
+			Cartao cartao = opDataBaseCartao.get();
+			
+			if(dados.nomeImpresso() != null) {
+				cartao.setNomeImpresso(dados.nomeImpresso());
+			}
+			
+			if(dados.codigo() != null) {
+				cartao.setCodigo(dados.codigo());
+			}
+			
+			repository.save(cartao);
+			return cartao;
+		} 
+	
 		return null;
 	}
 	
@@ -48,5 +60,4 @@ public class CartaoDao implements IdaoCartao{
 		repository.delete(entidade);
 		return false;
 	}	
-
 }

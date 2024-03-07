@@ -1,11 +1,18 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DadosAtualizacaoCartao(
 		
-		Long id,
+		@NotNull
+		Long idCliente,
+		
+		@NotNull
+		Long idCartao,
+		
 		String nomeImpresso,
 		String codigo
 			
-		) {
+									) {
 
 }

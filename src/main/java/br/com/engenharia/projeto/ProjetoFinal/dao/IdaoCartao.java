@@ -10,6 +10,6 @@ public interface IdaoCartao {
 
 	public String salvar(Cartao entidade);
 	public List<Cliente> consultar(Cartao entidade);
-	public String alterar(Cartao entidade, DadosAtualizacaoCartao dados);
+	Cartao alterar(Long idCartao, DadosAtualizacaoCartao dados);
 	public boolean inativar(Cartao entidade);
 }

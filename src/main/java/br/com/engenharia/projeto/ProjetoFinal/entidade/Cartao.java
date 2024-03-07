@@ -81,7 +81,8 @@ public class Cartao {
 	}
 	
 	public void setNomeImpresso(String nomeImpresso) {
-		if(nomeImpresso == null || nomeImpresso.trim().isEmpty()) {
+		System.out.println(nomeImpresso);
+		if(nomeImpresso == null || nomeImpresso.trim().isEmpty() || nomeImpresso.length() <= 2) {
 			throw new IllegalArgumentException("Nome deve possuir mais de 2 digitos");
 		}
 		this.nomeImpresso = nomeImpresso;
