@@ -17,13 +17,13 @@ import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cobranca;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Entrega;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Log;
-import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCliente;
-import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.IStrategyCriptografaSenha;
+import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.criptografiaSenha.IStrategyCriptografaSenha;
+import br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.post.IStrategyCliente;
 import jakarta.validation.Valid;
 
 @Service
 public class ServiceCliente {
-
+	
     @Autowired
     private ClienteDao daoCliente;
 
@@ -40,13 +40,13 @@ public class ServiceCliente {
     private List<IStrategyCliente> validadores;
 
     @Autowired
-    private List<IStrategyCriptografaSenha> criptografaSenha;
+    private List<IStrategyCriptografaSenha> criptografiaSenha;
 
     public DetalharCliente criar(@Valid DadosCadastroCliente dados) {
         
     	Cliente cliente = new Cliente(dados);
         validadores.forEach(v -> v.processar(cliente));
-        criptografaSenha.forEach(v -> v.processar(cliente));
+        criptografiaSenha.forEach(v -> v.processar(cliente));
         daoCliente.salvar(cliente);
 
         Set<Cobranca> cobrancas = criarCobrancas(dados, cliente);

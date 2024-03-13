@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
+package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.criptografiaSenha;
 
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 

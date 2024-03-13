@@ -1,7 +1,13 @@
 package br.com.engenharia.projeto.ProjetoFinal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.engenharia.projeto.ProjetoFinal.dao.CartaoDao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCartao;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
 import br.com.engenharia.projeto.ProjetoFinal.services.ServiceCartao;
 import jakarta.validation.Valid;
@@ -38,4 +46,16 @@ public class CartaoController {
 		DadosDetalhamentoCartao detalhamentoCartao = service.atualizar(dados);
         return ResponseEntity.ok(detalhamentoCartao);
 	}
+	
+	@GetMapping
+	public ResponseEntity<Page<Cartao>> listar(@PageableDefault(size = 10, sort = {"nomeImpresso"}) Pageable paginacao){
+		var page = new CartaoDao(repository).pegaTodosCartaoes(paginacao);
+		return ResponseEntity.ok(page);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deletar (@PathVariable Long id) {
+		new CartaoDao(repository).deletar(id);
+		return ResponseEntity.noContent().build();
+	}	
 }

@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
+package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.post;
 
 import java.util.Optional;
 
@@ -8,7 +8,7 @@ import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
 @Service
-public class ValidarExistencia extends ValidacaoAbstrataCliente{
+public class ValidarExistencia implements IStrategyCliente{
 
 	@Autowired
 	private ClienteRepository repository;
@@ -19,7 +19,6 @@ public class ValidarExistencia extends ValidacaoAbstrataCliente{
 	
 	public String processar(Cliente dominio) {
 		
-		System.out.println("Validar Existencia");
 		Optional<Cliente> cliente = repository.findByCpf(dominio.getCpf());
 		
 		if(!cliente.isEmpty()) {

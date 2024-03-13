@@ -1,8 +1,8 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-
 import java.time.LocalDate;
-import jakarta.annotation.Generated;
+
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Genero;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,7 +11,7 @@ public record DadosAtualizacaoCliente(
 		@NotNull
 		Long idCliente,
 		
-		Generated genero,
+		Genero genero,
 		
 		String nome,
 		
@@ -19,10 +19,7 @@ public record DadosAtualizacaoCliente(
 		
 		@Valid DadosCadastroEmail email,
 		
-		@Valid DadosCadastroTelefone telefone,
-		
-		@Valid DadosCadastroSenha senha
-		
+		@Valid DadosAtualizacaoTelefone telefone
+						
 		) {
-
 }

@@ -1,16 +1,16 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
-import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
-import jakarta.validation.ValidationException;
 
 @Service
 public class CartaoDao implements IdaoCartao{
@@ -50,14 +50,15 @@ public class CartaoDao implements IdaoCartao{
 	}
 	
 	@Override
-	public List<Cliente> consultar(Cartao entidade) {
-		// TODO Auto-generated method stub
-		return null;
+	public Page pegaTodosCartaoes(Pageable paginacao) {
+		return repository.findAll(paginacao).map(DadosDetalhamentoCartao::new);
 	}
 
 	@Override
-	public boolean inativar(Cartao entidade) {
-		repository.delete(entidade);
-		return false;
+	public void deletar(Long id) {
+		Optional<Cartao> cartao = repository.findById(id);
+		if(cartao.isPresent()) {
+			repository.deleteById(id);
+		}
 	}	
 }

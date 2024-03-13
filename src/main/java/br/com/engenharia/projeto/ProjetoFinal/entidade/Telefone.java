@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoTelefone;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroTelefone;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
@@ -52,11 +53,23 @@ public class Telefone {
 		this.telefone = dadosCadstroTelefone.telefone();
 	}
 	
+	public void setTelefone(DadosAtualizacaoTelefone dadosCadstroTelefone) {
+        String regexTelefone = "\\d{8,9}";
+        if(!dadosCadstroTelefone.telefone().matches(regexTelefone)) {
+        	throw new IllegalArgumentException("Telefone deve conter 8 ou 9 digitos");
+        }
+		this.telefone = dadosCadstroTelefone.telefone();
+	}
+	
 	public TipoTelefone getTipoTelefone() {
 		return tipoTelefone;
 	}
 	
 	public void setTipoTelefone(DadosCadastroTelefone dadosCadstroTelefone) {
+		this.tipoTelefone = dadosCadstroTelefone.tipo();
+	}
+	
+	public void setTipoTelefone(DadosAtualizacaoTelefone dadosCadstroTelefone) {
 		this.tipoTelefone = dadosCadstroTelefone.tipo();
 	}
 	

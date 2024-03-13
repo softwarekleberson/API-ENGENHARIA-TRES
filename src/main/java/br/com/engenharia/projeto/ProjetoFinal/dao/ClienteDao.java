@@ -3,9 +3,12 @@ package br.com.engenharia.projeto.ProjetoFinal.dao;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
 
@@ -21,36 +24,54 @@ public class ClienteDao implements IdaoCliente {
 
 	@Override
 	public void salvar(Cliente entidade) {
+		System.out.println("ppppp" + entidade);
 		this.repository.save(entidade);
 	}
 
 	@Override
-	public void alterar(Cliente entidade, DadosAtualizacaoCliente dados) {
+	public void alterarCliente(Long id, DadosAtualizacaoCliente dados) {
+		Optional<Cliente> opDataBaseCliente = repository.findById(id);
 		
-		if (dados.email() != null) {
-			entidade.setEmail(dados.email());
+		if(opDataBaseCliente.isPresent()) {
+			Cliente clienteUpdate = opDataBaseCliente.get();
+			
+			if(dados.nome() != null) {
+				clienteUpdate.setNome(dados.nome());
+			}
+			
+			if(dados.genero() != null) {
+				clienteUpdate.setGenero(dados.genero());
+			}
+			
+			if(dados.nascimento() != null) {
+				clienteUpdate.setNascimento(dados.nascimento());
+			}
+			
+			if(dados.email() != null) {
+				clienteUpdate.setEmail(dados.email());
+			}
+			
+			if(dados.telefone().ddd() != null) { 
+				clienteUpdate.getTelefone().setDdd(dados.telefone().ddd());
+			}
+			
+			if(dados.telefone().telefone() != null) {
+				clienteUpdate.getTelefone().setTelefone(dados.telefone());
+			}
+			
+			if(dados.telefone().tipo() != null) {
+				clienteUpdate.getTelefone().setTipoTelefone(dados.telefone());
+			}
 		}
-		if (dados.nome() != null) {
-			entidade.setNome(dados.nome());
-		}
-		if (dados.nascimento() != null) {
-			entidade.setNascimento(dados.nascimento());
-		}
-		if (dados.email() != null) {
-			entidade.setEmail(dados.email());
-		}
-		if (dados.telefone().ddd() != null) {
-			entidade.getTelefone().setDdd(dados.telefone().ddd());
-			;
-		}
-		if (dados.telefone().telefone() != null) {
-			entidade.getTelefone().setTelefone(dados.telefone());
-		}
-		if (dados.telefone().tipo() != null) {
-			entidade.getTelefone().setTipoTelefone(dados.telefone());
-		}
-		if (dados.senha() != null) {
-			entidade.setSenha(dados.senha());
+	}
+	
+	@Override
+	public void alterarSenha(Long id, String senhaCriptografada) {
+		Optional<Cliente> opDataBaseSenha = repository.findById(id);
+		
+		if(opDataBaseSenha.isPresent()) {
+			Cliente clienteUpdate = opDataBaseSenha.get();
+			clienteUpdate.CriptografarSenha(senhaCriptografada);
 		}
 	}
 
@@ -67,7 +88,15 @@ public class ClienteDao implements IdaoCliente {
 	}
 
 	@Override
-	public void excluir(Cliente entidade) {
-		entidade.setAtivo(false);
+	public Page pegaTodosClientes(Pageable paginacao) {
+		return repository.findAll(paginacao).map(DadosDetalhamentoCliente::new);
+	}
+	
+	@Override
+	public void deletar(Long id) {
+		Optional<Cliente> cliente = repository.findById(id);
+		if(cliente.isPresent()) {
+			repository.deleteById(id);;
+		}
 	}
 }

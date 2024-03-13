@@ -1,4 +1,4 @@
-package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao;
+package br.com.engenharia.projeto.ProjetoFinal.negocio.cliente.implementacao.post;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 
 @Service
-public class ValidarSenha extends ValidacaoAbstrataCliente {
+public class ValidarSenha implements IStrategyCliente {
 
     public String processar(Cliente dominio) {
-        String senha = dominio.getSenha();
-        System.out.println(senha);
+    	String senha = dominio.getSenha();
         if (senha.length() < 8) {
             throw new IllegalArgumentException("Senha deve ter no mínimo 8 caracteres");
         }

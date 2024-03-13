@@ -3,7 +3,7 @@ package br.com.engenharia.projeto.ProjetoFinal.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEntrega;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEntregas;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Entrega;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
 
@@ -23,7 +23,7 @@ public class EntregaDao implements IdaoEntrega{
 	}
 
 	@Override
-	public void alterar(Entrega entidade, DadosAtualizacaoEntrega dados) {
+	public void alterar(Entrega entidade, DadosAtualizacaoEntregas dados) {
 		// TODO Auto-generated method stub
 		
 	}

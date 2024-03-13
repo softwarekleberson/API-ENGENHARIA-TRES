@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroConfirmarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
@@ -142,6 +143,10 @@ public class Cliente {
 	public Telefone getTelefone() {
 		return telefone;
 	}
+	
+	public String getConfirmarSenha() {
+		return confirmar_Senha;
+	}
 
 	public void setTelefone(DadosCadastroTelefone dados) {
 		this.telefone = new Telefone(dados);
@@ -167,16 +172,25 @@ public class Cliente {
 		this.senha = dados.senha();
 	}
 	
+	public void setSenha(DadosAtualizacaoSenha dados) {
+		this.senha = dados.senha();
+	}
+	
 	public void setConfirmar_Senha(DadosCadastroConfirmarSenha senha) {
 		this.confirmar_Senha = senha.confirmarSenha();
 	}
 	
 	public void CriptografarSenha(String senhaCriptografada) {
+		System.out.println(senhaCriptografada);
 		this.senha = senhaCriptografada;
 	}
+	
+	public String devolveSenhaCriptografada() {
+		return this.senha;
+	}
 
-	public String getConfirmar_Senha() {
-		return confirmar_Senha;
+	public void setConfirmar_Senha(String confirmar_Senha) {
+		this.confirmar_Senha = confirmar_Senha;
 	}
 	
 	public void setEmail(DadosCadastroEmail dados) {
