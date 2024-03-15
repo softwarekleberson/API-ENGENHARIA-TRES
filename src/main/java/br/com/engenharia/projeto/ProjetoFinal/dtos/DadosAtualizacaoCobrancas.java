@@ -1,7 +1,5 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
-import java.util.List;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,7 +9,7 @@ public record DadosAtualizacaoCobrancas (
 		Long idCliente,
 		
 		@Valid
-		List<DadosAtualizacaoEndereco> cobranca
+		DadosAtualizacaoEndereco cobranca
 		
 									  ){
 }

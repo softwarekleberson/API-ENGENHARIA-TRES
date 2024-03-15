@@ -38,6 +38,7 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository repository;
+		
 	
 	@PostMapping
 	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroCliente dados, UriComponentsBuilder uriBuilder) {
@@ -54,8 +55,8 @@ public class ClienteController {
 	
 	@PutMapping
 	public  ResponseEntity atualizarCliente(@RequestBody @Valid DadosAtualizacaoCliente dados) {
-		DadosDetalhamentoCliente detalharCliente = serviceClienteUpdate.atualizarCliente(dados);
-		return ResponseEntity.ok(detalharCliente);
+		DadosDetalhamentoCliente updateCliente = serviceClienteUpdate.atualizarCliente(dados);
+		return ResponseEntity.ok(updateCliente);
 	}
 	
 	@PutMapping("/senha")
@@ -66,7 +67,6 @@ public class ClienteController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletar (@PathVariable Long id) {
-		System.out.println(id);
 		new ClienteDao(repository).deletar(id);
 		return ResponseEntity.noContent().build();
 	}	

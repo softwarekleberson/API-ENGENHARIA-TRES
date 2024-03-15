@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoEndereco(
 		
-		@NotNull
-		Long idEndereco,
-		
 		String tipoResidencia,
 		
 		String tipoLogradouro,

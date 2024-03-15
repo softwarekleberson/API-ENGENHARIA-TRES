@@ -48,11 +48,6 @@ public class CartaoDao implements IdaoCartao{
 	
 		return null;
 	}
-	
-	@Override
-	public Page pegaTodosCartaoes(Pageable paginacao) {
-		return repository.findAll(paginacao).map(DadosDetalhamentoCartao::new);
-	}
 
 	@Override
 	public void deletar(Long id) {
@@ -60,5 +55,13 @@ public class CartaoDao implements IdaoCartao{
 		if(cartao.isPresent()) {
 			repository.deleteById(id);
 		}
-	}	
+	}
+
+	public Page listarCartaosDoCliente(Long clienteId, Pageable pageable) {
+		 Page<Cartao> cartoesPage = repository.findByCliente_Id(clienteId, pageable);	        
+	     if(cartoesPage.isEmpty()) {
+	    	 throw new IllegalArgumentException("Id incorreto");
+	     }
+		 return cartoesPage.map(DadosDetalhamentoCartao::new);
+	}
 }

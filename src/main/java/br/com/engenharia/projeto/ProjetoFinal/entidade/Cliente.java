@@ -1,11 +1,12 @@
 package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroConfirmarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
@@ -59,16 +60,16 @@ public class Cliente {
 	private Telefone telefone;
 
 	@OneToMany(mappedBy = "cliente")
-	private Set<Cartao> cartoes;
+	private List<Cartao> cartoes;
 
 	@Embedded
 	private Email email;
 
 	@OneToMany(mappedBy = "cliente")
-	private Set<Entrega> entrega;
+	private List<Entrega> entrega;
 
 	@OneToMany(mappedBy = "cliente")
-	private Set<Cobranca> cobranca;
+	private List<Cobranca> cobranca;
 
 	
 	public Cliente(@Valid DadosCadastroCliente dados) {
@@ -152,11 +153,11 @@ public class Cliente {
 		this.telefone = new Telefone(dados);
 	}
 	
-	public Set<Cartao> getCartoes() {
+	public List<Cartao> getCartoes() {
 		return cartoes;
 	}
 
-	public void setCartoes(Set<Cartao> cartoes) {
+	public void setCartoes(List<Cartao> cartoes) {
 		this.cartoes = cartoes;
 	}
 
@@ -197,35 +198,27 @@ public class Cliente {
 		this.email = new Email(dados);
 	}
 
-	public Set<Entrega> getEntrega() {
+	public List<Entrega> getEntrega() {
 		return entrega;
 	}
 
-	public void setEntrega(Set<DadosCadastroEntrega> entregas) {
+	public void setEntrega(List<DadosCadastroEntrega> entregas) {
 	    this.entrega = entregas.stream()
 	                            .map(entrega -> new Entrega(entrega)) // Convertendo DadosCadastroEntrega para Entrega
-	                            .collect(Collectors.toSet());
+	                            .collect(Collectors.toList());
 	}
 
-	public Set<Cobranca> getCobranca() {
+	public List<Cobranca> getCobranca() {
 		return cobranca;
 	}
 
-	public void setCobranca(Set<DadosCadastroEndereco> cobrancas) {
+	public void setCobranca(List<DadosCadastroCobranca> cobrancas) {
 	    this.cobranca = cobrancas.stream()
-	                              .map(cobranca -> new Cobranca(cobranca)) // Convertendo DadosCadastroEndereco para Cobranca
-	                              .collect(Collectors.toSet());
+	                              .map(cobranca -> new Cobranca(cobranca)) // Convertendo DadosCadastroCobranca para Cobranca
+	                              .collect(Collectors.toList());
 	}
 
 	public void excluir() {
 		this.ativo = false;
-	}
-
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", nascimento=" + nascimento + ", senha="
-				+ senha + ", ativo=" + ativo + ", confirmar_Senha=" + confirmar_Senha + ", genero=" + genero
-				+ ", telefone=" + telefone + ", cartoes=" + cartoes + ", email=" + email + ", entrega=" + entrega
-				+ ", cobranca=" + cobranca + "]";
 	}
 }

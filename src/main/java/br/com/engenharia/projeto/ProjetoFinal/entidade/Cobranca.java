@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,8 +27,8 @@ public class Cobranca extends Endereco{
 	
 	private boolean ativo;
 	
-	public Cobranca(@Valid DadosCadastroEndereco dados) {
-		super(dados);
+	public Cobranca(@Valid DadosCadastroCobranca dados) {
+		super(dados.endereco());
 		setAtivo(true);
 	}
 
@@ -39,5 +40,25 @@ public class Cobranca extends Endereco{
 	public void setAtivo(boolean ativo) {
 		System.out.println("ativo cobranca");
 		this.ativo = ativo;
+	}
+
+	public void setTipoLogradouro(String tipoLogradouro) {
+		this.tipoLogradouro = new TipoLogradouro();
+		this.tipoLogradouro.setTipoLogradouro(tipoLogradouro);
+	}
+
+	public void setTipoResidencia(String tipoResidencia) {
+		this.tipoResidencia = new TipoResidencia();
+		this.tipoResidencia.setTipoResidencia(tipoResidencia);
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = new Cidade();
+		this.cidade.setCidade(cidade);
+	}
+
+	public void setEstado(String estado) {
+		this.cidade = new Cidade();
+		this.cidade.setEstado(estado);
 	}
 }

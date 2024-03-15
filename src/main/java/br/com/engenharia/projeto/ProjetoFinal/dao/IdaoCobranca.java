@@ -1,11 +1,12 @@
 package br.com.engenharia.projeto.ProjetoFinal.dao;
 
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCobrancas;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cobranca;
+import br.com.engenharia.projeto.ProjetoFinal.entidade.Endereco;
 
 public interface IdaoCobranca {
 
 	public void salvar(Cobranca cobranca);
-	public void alterar(Cobranca cobranca, DadosAtualizacaoCliente dados);
-	public void excluir(Cobranca cobranca);
+	void excluir(Long clienteId, Long idCobranca);
+	Cobranca alterar(DadosAtualizacaoCobrancas dados, Long clienteId, Long idCobranca);
 }

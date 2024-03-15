@@ -1,7 +1,7 @@
 package br.com.engenharia.projeto.ProjetoFinal.dtos;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Genero;
 import jakarta.validation.Valid;
@@ -26,8 +26,8 @@ public record DadosCadastroCliente(
         
         @Valid @NotNull DadosCadastroConfirmarSenha confirmarSenha,
 
-        @Valid @NotNull Set<DadosCadastroEntrega> entrega,
-        
-        @Valid @NotNull Set<DadosCadastroEndereco> cobranca
-                                                                    )                                                       {
+        @Valid @NotNull List<DadosCadastroEntrega> entrega,
+                
+        @Valid @NotNull List<DadosCadastroCobranca> cobranca
+                                                                   )                                                       {
 }

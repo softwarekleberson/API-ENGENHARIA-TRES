@@ -1,7 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.services;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +48,8 @@ public class ServiceCliente {
         criptografiaSenha.forEach(v -> v.processar(cliente));
         daoCliente.salvar(cliente);
 
-        Set<Cobranca> cobrancas = criarCobrancas(dados, cliente);
-        Set<Entrega> entregas = criarEntregas(dados, cliente);
+        List<Cobranca> cobrancas = criarCobrancas(dados, cliente);
+        List<Entrega> entregas = criarEntregas(dados, cliente);
         atribuirIdCliente(cobrancas, entregas, cliente.getId());
 
         salvarCobrancas(cobrancas);
@@ -62,28 +61,29 @@ public class ServiceCliente {
         return new DetalharCliente(cliente);
     }
 
-    private Set<Cobranca> criarCobrancas(DadosCadastroCliente dados, Cliente cliente) {
-        return dados.cobranca().stream()
+    private List<Cobranca> criarCobrancas(DadosCadastroCliente dados, Cliente cliente) {
+            	
+    	return dados.cobranca().stream()
                 .map(Cobranca::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());        
     }
 
-    private Set<Entrega> criarEntregas(DadosCadastroCliente dados, Cliente cliente) {
+    private List<Entrega> criarEntregas(DadosCadastroCliente dados, Cliente cliente) {
         return dados.entrega().stream()
                 .map(Entrega::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
-    private void atribuirIdCliente(Set<Cobranca> cobrancas, Set<Entrega> entregas, Long clienteId) {
+    private void atribuirIdCliente(List<Cobranca> cobrancas, List<Entrega> entregas, Long clienteId) {
         cobrancas.forEach(c -> c.setClinte(clienteId));
         entregas.forEach(e -> e.setClinte(clienteId));
     }
 
-    private void salvarCobrancas(Set<Cobranca> cobrancas) {
+    private void salvarCobrancas(List<Cobranca> cobrancas) {
         cobrancas.forEach(daoCobranca::salvar);
     }
 
-    private void salvarEntregas(Set<Entrega> entregas) {
+    private void salvarEntregas(List<Entrega> entregas) {
         entregas.forEach(daoEntrega::salvar);
     }
 }

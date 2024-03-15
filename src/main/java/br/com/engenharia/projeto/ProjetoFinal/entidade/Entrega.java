@@ -53,4 +53,18 @@ public class Entrega extends Endereco{
 		}
 		this.fraseEntrega = fraseEntrega;
 	}
+
+	public void setTipoLogradouro(String tipoLogradouro) {
+		this.tipoLogradouro = new TipoLogradouro(tipoLogradouro);
+	}
+
+	public void setTipoResidencia(String tipoResidencia) {
+		this.tipoResidencia = new TipoResidencia(tipoResidencia);
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = new Cidade();
+		this.cidade.setCidade(cidade);
+	}
+
 }

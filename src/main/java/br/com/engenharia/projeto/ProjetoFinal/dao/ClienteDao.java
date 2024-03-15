@@ -11,26 +11,27 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
 
 @Service
 public class ClienteDao implements IdaoCliente {
 
 	@Autowired
-	private ClienteRepository repository;
-
+	private ClienteRepository clienteRepository;
+		
 	public ClienteDao(ClienteRepository repository) {
-		this.repository = repository;
+		this.clienteRepository = repository;
 	}
 
 	@Override
 	public void salvar(Cliente entidade) {
-		System.out.println("ppppp" + entidade);
-		this.repository.save(entidade);
+		this.clienteRepository.save(entidade);
 	}
 
 	@Override
 	public void alterarCliente(Long id, DadosAtualizacaoCliente dados) {
-		Optional<Cliente> opDataBaseCliente = repository.findById(id);
+		Optional<Cliente> opDataBaseCliente = clienteRepository.findById(id);
 		
 		if(opDataBaseCliente.isPresent()) {
 			Cliente clienteUpdate = opDataBaseCliente.get();
@@ -67,7 +68,7 @@ public class ClienteDao implements IdaoCliente {
 	
 	@Override
 	public void alterarSenha(Long id, String senhaCriptografada) {
-		Optional<Cliente> opDataBaseSenha = repository.findById(id);
+		Optional<Cliente> opDataBaseSenha = clienteRepository.findById(id);
 		
 		if(opDataBaseSenha.isPresent()) {
 			Cliente clienteUpdate = opDataBaseSenha.get();
@@ -83,20 +84,22 @@ public class ClienteDao implements IdaoCliente {
 			return null;
 		}
 		
-		Optional<Cliente> cpfVerifica = repository.findByCpf(cpfCliente);
+		Optional<Cliente> cpfVerifica = clienteRepository.findByCpf(cpfCliente);
 		return cpfVerifica;
 	}
 
 	@Override
 	public Page pegaTodosClientes(Pageable paginacao) {
-		return repository.findAll(paginacao).map(DadosDetalhamentoCliente::new);
+		return clienteRepository.findAll(paginacao).map(DadosDetalhamentoCliente::new);
 	}
 	
 	@Override
 	public void deletar(Long id) {
-		Optional<Cliente> cliente = repository.findById(id);
-		if(cliente.isPresent()) {
-			repository.deleteById(id);;
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		if(cliente.isEmpty()) {
+			throw new IllegalArgumentException("Id incorreto");
 		}
+		
+		clienteRepository.deleteById(id);;
 	}
 }

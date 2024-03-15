@@ -48,5 +48,8 @@ public class Estado{
 		}
 		this.pais = new Pais(dados);
 	}
-	
+
+	public void setPais(String pais) {
+		this.pais = new Pais(pais);
+	}	
 }

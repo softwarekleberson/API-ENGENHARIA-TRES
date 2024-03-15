@@ -1,7 +1,5 @@
 package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
-import java.util.Objects;
-
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

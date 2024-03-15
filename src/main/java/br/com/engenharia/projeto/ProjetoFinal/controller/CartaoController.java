@@ -3,7 +3,6 @@ package br.com.engenharia.projeto.ProjetoFinal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,6 @@ import br.com.engenharia.projeto.ProjetoFinal.dao.CartaoDao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCartao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCartao;
-import br.com.engenharia.projeto.ProjetoFinal.entidade.Cartao;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
 import br.com.engenharia.projeto.ProjetoFinal.services.ServiceCartao;
 import jakarta.validation.Valid;
@@ -34,6 +32,7 @@ public class CartaoController {
 	@Autowired
 	private CartaoRepository repository;
 	
+	
 	@PostMapping
 	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroCartao dados, UriComponentsBuilder uriBuilder) {
 		var dto = service.criar(dados);
@@ -47,11 +46,11 @@ public class CartaoController {
         return ResponseEntity.ok(detalhamentoCartao);
 	}
 	
-	@GetMapping
-	public ResponseEntity<Page<Cartao>> listar(@PageableDefault(size = 10, sort = {"nomeImpresso"}) Pageable paginacao){
-		var page = new CartaoDao(repository).pegaTodosCartaoes(paginacao);
-		return ResponseEntity.ok(page);
-	}
+	@GetMapping("{clienteId}")
+	public ResponseEntity<Page<DadosDetalhamentoCartao>> listarPorCliente(@PathVariable Long clienteId, Pageable pageable){
+		Page<DadosDetalhamentoCartao> cartoes = new CartaoDao(repository).listarCartaosDoCliente(clienteId, pageable);
+		return ResponseEntity.ok(cartoes);
+    }
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletar (@PathVariable Long id) {

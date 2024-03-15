@@ -41,8 +41,14 @@ public class Cidade {
 	public Estado getEstado() {
 		return estado;
 	}
+	
 	public void setEstado(DadosCadastroEndereco dados) {
 		this.estado = new Estado(dados);
+	}
+
+	public void setEstado(String estado) {
+		this.estado = new Estado();
+		this.estado.setEstado(estado);
 	}
 	
 }
