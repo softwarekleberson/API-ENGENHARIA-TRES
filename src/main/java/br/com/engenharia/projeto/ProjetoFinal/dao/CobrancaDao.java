@@ -32,6 +32,18 @@ public class CobrancaDao implements IdaoCobranca{
 	public void salvar(Cobranca cobranca) {
 		this.repository.save(cobranca);
 	}
+	
+	@Override
+	public DadosDetalhamentoCobranca salvarNovaCobranca(Cobranca cobranca, Long clienteId) {
+		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
+		if(cliente.isEmpty()) {
+			throw new IllegalArgumentException("Id do cliente incorreto");
+		}
+		
+		cobranca.setCliente(clienteId);
+		repository.save(cobranca);
+		return new DadosDetalhamentoCobranca(cobranca);
+	}
 
 	@Override
 	public Cobranca alterar(DadosAtualizacaoEndereco dados, Long clienteId, Long idCobranca) {
@@ -96,6 +108,7 @@ public class CobrancaDao implements IdaoCobranca{
 		return null;
 	}
 
+	@Override
 	public Page<DadosDetalhamentoCobranca> listarEnderecosCobrancaDoCliente(Long clienteId, Pageable pageable) {
 		Page<Cobranca> cobrancas = repository.findByCliente_Id(clienteId, pageable);	        
 	    if(cobrancas.isEmpty()) {
@@ -104,6 +117,7 @@ public class CobrancaDao implements IdaoCobranca{
 		return cobrancas.map(DadosDetalhamentoCobranca::new);
 	}
 
+	@Override
 	public void excluir(Long clienteId, Long idCobranca) {
 		
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);

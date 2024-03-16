@@ -217,8 +217,4 @@ public class Cliente {
 	                              .map(cobranca -> new Cobranca(cobranca)) // Convertendo DadosCadastroCobranca para Cobranca
 	                              .collect(Collectors.toList());
 	}
-
-	public void excluir() {
-		this.ativo = false;
-	}
 }

@@ -32,6 +32,20 @@ public class EntregaDao implements IdaoEntrega{
 	public void salvar(Entrega entrega) {
 		this.repository.save(entrega);
 	}
+	
+	@Override
+	public DadosDetalhamentoEntrega salvarNovoEntrega(Entrega entrega, Long clienteId) {
+		Optional<Cliente> existeCliente = clienteRepository.findById(clienteId);
+		
+		if(existeCliente.isEmpty()) {
+			throw new IllegalArgumentException("Id do cliente não existe");
+		}
+		
+		entrega.setClinte(clienteId);
+		repository.save(entrega);
+		return new DadosDetalhamentoEntrega(entrega);
+		
+	}
 
 	@Override
 	public Entrega alterar(DadosAtualizacaoEntregas dados, Long clienteId, Long idEntrega) {
@@ -98,6 +112,7 @@ public class EntregaDao implements IdaoEntrega{
 		return null;
 	}
 
+	@Override
 	public Page<DadosDetalhamentoEntrega> listarEntregasDoCliente(Long clienteId, Pageable pageable) {
 		Page<Entrega> entregas = repository.findByCliente_Id(clienteId, pageable);	        
 	    if(entregas.isEmpty()) {
@@ -106,15 +121,7 @@ public class EntregaDao implements IdaoEntrega{
 		return entregas.map(DadosDetalhamentoEntrega::new);
 	}
 
-	public void exluir(Long clienteId) {
-		Optional<Entrega> existe = repository.findById(clienteId);
-		if(existe.isEmpty()) {
-			throw new IllegalArgumentException("Id incorreto");
-		}
-		
-		repository.deleteById(clienteId);
-	}
-
+	@Override
 	public void excluir(Long clienteId, Long idEntrega) {
 		
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);

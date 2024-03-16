@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,10 @@ import br.com.engenharia.projeto.ProjetoFinal.dao.CobrancaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.EntregaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEntregas;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCobranca;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cobranca;
@@ -38,7 +43,19 @@ public class EnderecoController {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@PostMapping("/entrega/{clienteId}")
+	public ResponseEntity cadastrarEntrega(@RequestBody @Valid DadosCadastroEntrega dados, @PathVariable Long clienteId) {
+		var entrega = new Entrega(dados);
+		new EntregaDao(entregaRepository, clienteRepository).salvarNovoEntrega(entrega, clienteId);
+		return ResponseEntity.ok(entrega);
+	}
 	
+	@PostMapping("/cobranca/{clienteId}")
+	public ResponseEntity cadastrarCobranca(@RequestBody @Valid DadosCadastroCobranca dados, @PathVariable Long clienteId) {
+		var cobranca = new Cobranca(dados);
+		new CobrancaDao(cobrancaRepository, clienteRepository).salvarNovaCobranca(cobranca, clienteId);
+		return ResponseEntity.ok(cobranca);
+	}
 	
 	@GetMapping("/entrega/{clienteId}")
 	public ResponseEntity<Page<DadosDetalhamentoEntrega>> listarEnderecosEntrega(@PathVariable Long clienteId, Pageable pageable){
