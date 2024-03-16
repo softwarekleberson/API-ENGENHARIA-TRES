@@ -11,8 +11,6 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
-import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
-import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
 
 @Service
 public class ClienteDao implements IdaoCliente {

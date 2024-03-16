@@ -61,8 +61,7 @@ public class ServiceCliente {
         return new DetalharCliente(cliente);
     }
 
-    private List<Cobranca> criarCobrancas(DadosCadastroCliente dados, Cliente cliente) {
-            	
+    private List<Cobranca> criarCobrancas(DadosCadastroCliente dados, Cliente cliente) {        
     	return dados.cobranca().stream()
                 .map(Cobranca::new)
                 .collect(Collectors.toList());        
@@ -75,15 +74,15 @@ public class ServiceCliente {
     }
 
     private void atribuirIdCliente(List<Cobranca> cobrancas, List<Entrega> entregas, Long clienteId) {
-        cobrancas.forEach(c -> c.setClinte(clienteId));
+    	cobrancas.forEach(c -> c.setCliente(clienteId));
         entregas.forEach(e -> e.setClinte(clienteId));
     }
 
     private void salvarCobrancas(List<Cobranca> cobrancas) {
-        cobrancas.forEach(daoCobranca::salvar);
+    	cobrancas.forEach(daoCobranca::salvar);
     }
 
     private void salvarEntregas(List<Entrega> entregas) {
-        entregas.forEach(daoEntrega::salvar);
+    	entregas.forEach(daoEntrega::salvar);
     }
 }

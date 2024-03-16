@@ -32,6 +32,7 @@ public class Estado{
 	}
 	
 	public void setEstado(String estado) {
+		System.out.println(estado);
 		if(estado == null || estado.trim().length() == 0) {
 			throw new IllegalArgumentException("Estado não deve ser nulo");
 		}

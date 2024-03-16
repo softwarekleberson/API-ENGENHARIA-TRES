@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCobrancas;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cobranca;
@@ -34,10 +34,10 @@ public class CobrancaDao implements IdaoCobranca{
 	}
 
 	@Override
-	public Cobranca alterar(DadosAtualizacaoCobrancas dados, Long clienteId, Long idCobranca) {
+	public Cobranca alterar(DadosAtualizacaoEndereco dados, Long clienteId, Long idCobranca) {
 		
 		Optional<Cliente> existeCliente = clienteRepository.findById(clienteId);
-		Optional<Cobranca> opDataBaseCobranca = repository.findById(dados.idCliente());
+		Optional<Cobranca> opDataBaseCobranca = repository.findById(idCobranca);
 		
 		if(existeCliente.isEmpty() || opDataBaseCobranca.isEmpty()) {
 			throw new IllegalArgumentException("Id cliente ou id cobranca incorreto");
@@ -48,44 +48,45 @@ public class CobrancaDao implements IdaoCobranca{
 			if(opDataBaseCobranca.isPresent()) {
 				Cobranca cobranca = opDataBaseCobranca.get();
 				
-				if(dados.cobranca().logradouro() != null) {
-					cobranca.setLogradouro(dados.cobranca().logradouro());
+				if(dados.logradouro() != null) {
+					System.out.println(dados.logradouro());
+					cobranca.setLogradouro(dados.logradouro());
 				}
 				
-				if(dados.cobranca().numero() != null) {
-					cobranca.setNumero(dados.cobranca().numero());
+				if(dados.numero() != null) {
+					cobranca.setNumero(dados.numero());
 				}
 				
-				if(dados.cobranca().bairro() != null) {
-					cobranca.setBairro(dados.cobranca().bairro());
+				if(dados.bairro() != null) {
+					cobranca.setBairro(dados.bairro());
 				}
 				
-				if(dados.cobranca().cep() != null) {
-					cobranca.setCep(dados.cobranca().cep());
+				if(dados.cep() != null) {
+					cobranca.setCep(dados.cep());
 				}
 				
-				if(dados.cobranca().observacao() != null) {
-					cobranca.setObservacao(dados.cobranca().observacao());
+				if(dados.observacao() != null) {
+					cobranca.setObservacao(dados.observacao());
 				}
 				
-				if(dados.cobranca().tipoLogradouro() != null) {
-					cobranca.setTipoLogradouro(dados.cobranca().tipoLogradouro());
+				if(dados.tipoLogradouro() != null) {
+					cobranca.setLogradouro(dados.tipoLogradouro());
 				}
 				
-				if(dados.cobranca().tipoResidencia() != null) {
-					cobranca.setTipoResidencia(dados.cobranca().tipoResidencia());
+				if(dados.tipoResidencia() != null) {
+					cobranca.setTipoResidencia(dados.tipoResidencia());
 				}
 				
-				if(dados.cobranca().cidade() != null) {
-					cobranca.setCidade(dados.cobranca().cidade());
+				if(dados.cidade() != null) {
+					cobranca.getCidade().setCidade(dados.cidade());
 				}
 				
-				if(dados.cobranca().estado() != null) {
-					cobranca.setEstado(dados.cobranca().estado());
+				if(dados.estado() != null) {
+					cobranca.getCidade().getEstado().setEstado(dados.estado());
 				}
 				
-				if(dados.cobranca().pais() != null) {
-					cobranca.getCidade().getEstado().setPais(dados.cobranca().pais());
+				if(dados.pais() != null) {
+					cobranca.getCidade().getEstado().setPais(dados.pais());
 				}
 				
 				repository.save(cobranca);

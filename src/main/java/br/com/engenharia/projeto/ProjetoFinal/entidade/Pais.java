@@ -28,4 +28,11 @@ public class Pais {
 		}
 		this.pais = dados.pais();
 	}
+	
+	public void setPaisUpdate(String pais) {
+		if(pais == null || pais.trim().length() == 0) {
+			throw new IllegalArgumentException("Pais não deve ser nulo");
+		}
+		this.pais = pais;
+	}
 }

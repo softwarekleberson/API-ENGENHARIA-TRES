@@ -44,8 +44,7 @@ public abstract class Endereco {
 		setNumero(dados.numero());
 		setObservacao(dados.observacao());
 		setTipoLogradouro(dados);
-		setTipoResidencia(dados);
-		
+		setTipoResidencia(dados);		
 	}
 
 	public void setId(Long id) {
@@ -96,8 +95,16 @@ public abstract class Endereco {
 		}
 		this.tipoResidencia = new TipoResidencia(tipoResidencia);
 	}
+	
+	public void setTipoResidencia(String tipoResidencia) {
+		if(tipoResidencia == null || tipoResidencia.trim().length() == 0) {
+			throw new IllegalArgumentException("Tipo de residencia não deve ser nulo");
 
-	public void setCidade(DadosCadastroEndereco cidade) {
-		this.cidade = new Cidade(cidade);
+		}
+		this.tipoResidencia = new TipoResidencia(tipoResidencia);
+	}
+
+	public void setCidade(DadosCadastroEndereco dados) {
+		this.cidade = new Cidade(dados);
 	}
 }

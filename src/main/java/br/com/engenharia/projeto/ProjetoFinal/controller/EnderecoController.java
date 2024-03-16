@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.engenharia.projeto.ProjetoFinal.dao.CobrancaDao;
 import br.com.engenharia.projeto.ProjetoFinal.dao.EntregaDao;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCobrancas;
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoEntregas;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoEntrega;
@@ -39,6 +39,7 @@ public class EnderecoController {
 	private ClienteRepository clienteRepository;
 	
 	
+	
 	@GetMapping("/entrega/{clienteId}")
 	public ResponseEntity<Page<DadosDetalhamentoEntrega>> listarEnderecosEntrega(@PathVariable Long clienteId, Pageable pageable){
 		Page<DadosDetalhamentoEntrega> entregas = new EntregaDao(entregaRepository, clienteRepository).listarEntregasDoCliente(clienteId, pageable);
@@ -58,7 +59,7 @@ public class EnderecoController {
 	}
 	
 	@PutMapping("/cobranca/{clienteId}/{idCobranca}")
-	public  ResponseEntity atualizarCobranca(@RequestBody @Valid DadosAtualizacaoCobrancas dados, @PathVariable Long clienteId, @PathVariable Long idCobranca) {
+	public  ResponseEntity atualizarCobranca(@RequestBody @Valid DadosAtualizacaoEndereco dados, @PathVariable Long clienteId, @PathVariable Long idCobranca) {
 		Cobranca updateCobranca = new CobrancaDao(cobrancaRepository, clienteRepository).alterar(dados, clienteId, idCobranca);
 		return ResponseEntity.ok(updateCobranca);
 	}

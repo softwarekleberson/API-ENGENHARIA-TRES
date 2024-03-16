@@ -37,6 +37,7 @@ public class Entrega extends Endereco{
 	public void setClinte(Long idCliente) {
 		this.cliente = new Cliente();
 		cliente.setId(idCliente);
+		System.out.println("Entrega " + this.cliente.getId());
 	}
 	
 	public void setAtivo(boolean ativo) {
@@ -53,18 +54,4 @@ public class Entrega extends Endereco{
 		}
 		this.fraseEntrega = fraseEntrega;
 	}
-
-	public void setTipoLogradouro(String tipoLogradouro) {
-		this.tipoLogradouro = new TipoLogradouro(tipoLogradouro);
-	}
-
-	public void setTipoResidencia(String tipoResidencia) {
-		this.tipoResidencia = new TipoResidencia(tipoResidencia);
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = new Cidade();
-		this.cidade.setCidade(cidade);
-	}
-
 }

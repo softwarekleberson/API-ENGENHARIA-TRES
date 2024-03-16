@@ -1,5 +1,6 @@
 package br.com.engenharia.projeto.ProjetoFinal.entidade;
 
+import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
@@ -16,6 +17,11 @@ public class Cidade {
 	@Embedded
 	private Estado estado;
 	
+	public Cidade(DadosCadastroCobranca dados) {
+		setCidade(dados.endereco().cidade());
+		setEstado(dados.endereco());
+	}
+	
 	public Cidade(DadosCadastroEndereco dados) {
 		setCidade(dados.cidade());
 		setEstado(dados);
@@ -31,8 +37,8 @@ public class Cidade {
 	}
 	
 	public void setCidade(String cidade) {
-		 if (cidade == null || cidade.trim().isEmpty()) {
-		        throw new IllegalArgumentException("Cidade não deve ser nulo ou vazio");
+		if (cidade == null || cidade.trim().isEmpty()) {
+			throw new IllegalArgumentException("Cidade não deve ser nulo ou vazio");
 		 }
 		
 		this.cidade = cidade;
@@ -45,10 +51,4 @@ public class Cidade {
 	public void setEstado(DadosCadastroEndereco dados) {
 		this.estado = new Estado(dados);
 	}
-
-	public void setEstado(String estado) {
-		this.estado = new Estado();
-		this.estado.setEstado(estado);
-	}
-	
 }

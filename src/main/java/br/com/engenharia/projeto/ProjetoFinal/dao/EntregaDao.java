@@ -72,23 +72,23 @@ public class EntregaDao implements IdaoEntrega{
 				}
 				
 				if(dados.entrega().tipoLogradouro() != null) {
-					entrega.setTipoLogradouro(dados.entrega().tipoLogradouro());
+					entrega.getTipoLogradouro().setTipoLogradouro(dados.entrega().tipoLogradouro());
 				}
 				
 				if(dados.entrega().tipoResidencia() != null) {
-					entrega.setTipoResidencia(dados.entrega().tipoResidencia());
+					entrega.getTipoResidencia().setTipoResidencia(dados.entrega().tipoResidencia());
 				}
 				
 				if(dados.entrega().cidade() != null) {
-					entrega.setCidade(dados.entrega().cidade());
+					entrega.getCidade().setCidade(dados.entrega().cidade());
 				}
 				
 				if(dados.entrega().estado() != null) {
-					entrega.getCidade().setEstado(dados.entrega().estado());
+					entrega.getCidade().getEstado().setEstado(dados.entrega().estado());
 				}
 				
 				if(dados.entrega().pais() != null) {
-					entrega.getCidade().getEstado().setEstado(dados.entrega().pais());
+					entrega.getCidade().getEstado().getPais().setPaisUpdate(dados.entrega().pais());
 				}
 				
 				repository.save(entrega);
