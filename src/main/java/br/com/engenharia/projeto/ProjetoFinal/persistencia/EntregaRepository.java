@@ -3,11 +3,16 @@ package br.com.engenharia.projeto.ProjetoFinal.persistencia;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Entrega;
+import jakarta.transaction.Transactional;
 
 public interface EntregaRepository extends JpaRepository<Entrega, Long>{
 
 	Page<Entrega> findByCliente_Id(Long clienteId, Pageable pageable);
 
+	@Transactional
+    @Modifying
+    void deleteByCliente_Id(Long clienteId);
 }

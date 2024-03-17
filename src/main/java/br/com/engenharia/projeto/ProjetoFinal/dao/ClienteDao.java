@@ -10,16 +10,42 @@ import org.springframework.stereotype.Service;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteDao implements IdaoCliente {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private CartaoRepository cartaoRepository;
+	
+	@Autowired
+	private CobrancaRepository cobrancaRepository;
+	
+	@Autowired
+	private EntregaRepository entregaRepository;
 		
-	public ClienteDao(ClienteRepository repository) {
+	public ClienteDao(ClienteRepository repository, CartaoRepository cartaoRepository,
+			CobrancaRepository cobrancaRepository, EntregaRepository entregaRepository) {
+		
 		this.clienteRepository = repository;
+		this.cartaoRepository = cartaoRepository;
+		this.cobrancaRepository = cobrancaRepository;
+		this.entregaRepository = entregaRepository;
+	}
+	
+	public ClienteDao(ClienteRepository repository) {		
+		this.clienteRepository = repository;
+	}
+	
+	public ClienteDao() {		
+		
 	}
 
 	@Override
@@ -92,12 +118,23 @@ public class ClienteDao implements IdaoCliente {
 	}
 	
 	@Override
+	@Transactional
 	public void deletar(Long id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if(cliente.isEmpty()) {
-			throw new IllegalArgumentException("Id incorreto");
-		}
 		
-		clienteRepository.deleteById(id);;
+		try {
+			
+			Optional<Cliente> clienteExiste = clienteRepository.findById(id);
+			if(clienteExiste.isEmpty()) {
+				throw new IllegalArgumentException("Id incorreto");
+			}
+						
+			cobrancaRepository.deleteByCliente_Id(id);
+		    entregaRepository.deleteByCliente_Id(id);
+		    cartaoRepository.deleteByCliente_Id(id);
+			clienteRepository.deleteById(id);
+			
+		} catch (Exception e) {
+	        throw new RuntimeException("Falha ao excluir o cliente e suas entidades relacionadas", e.getCause());
+		}
 	}
 }

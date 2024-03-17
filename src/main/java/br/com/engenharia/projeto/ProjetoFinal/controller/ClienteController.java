@@ -21,7 +21,10 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosAtualizacaoSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosDetalhamentoCliente;
 import br.com.engenharia.projeto.ProjetoFinal.entidade.Cliente;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.CartaoRepository;
 import br.com.engenharia.projeto.ProjetoFinal.persistencia.ClienteRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.CobrancaRepository;
+import br.com.engenharia.projeto.ProjetoFinal.persistencia.EntregaRepository;
 import br.com.engenharia.projeto.ProjetoFinal.services.ServiceCliente;
 import br.com.engenharia.projeto.ProjetoFinal.services.ServiceClienteUpdate;
 import jakarta.validation.Valid;
@@ -37,7 +40,16 @@ public class ClienteController {
 	private ServiceClienteUpdate serviceClienteUpdate;
 	
 	@Autowired
-	private ClienteRepository repository;
+	private ClienteRepository Clienterepository;
+	
+	@Autowired
+	private CartaoRepository cartaoRepository;
+	
+	@Autowired
+	private CobrancaRepository cobrancaRepository;
+	
+	@Autowired
+	private EntregaRepository entregaRepository;
 		
 	
 	@PostMapping
@@ -49,7 +61,7 @@ public class ClienteController {
 	
 	@GetMapping
 	public ResponseEntity<Page<Cliente>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-		var page = new ClienteDao(repository).pegaTodosClientes(paginacao);
+		var page = new ClienteDao(Clienterepository).pegaTodosClientes(paginacao);
 		return ResponseEntity.ok(page);
 	}
 	
@@ -67,7 +79,7 @@ public class ClienteController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletar (@PathVariable Long id) {
-		new ClienteDao(repository).deletar(id);
+		new ClienteDao(Clienterepository, cartaoRepository, cobrancaRepository, entregaRepository).deletar(id);
 		return ResponseEntity.noContent().build();
 	}	
 }
