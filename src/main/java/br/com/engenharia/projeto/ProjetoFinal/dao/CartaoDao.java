@@ -52,9 +52,10 @@ public class CartaoDao implements IdaoCartao{
 	@Override
 	public void deletar(Long id) {
 		Optional<Cartao> cartao = repository.findById(id);
-		if(cartao.isPresent()) {
-			repository.deleteById(id);
+		if(cartao.isEmpty()) {
+			throw new IllegalArgumentException("Id cartão incorreto");
 		}
+		repository.deleteById(id);
 	}
 
 	public Page listarCartaosDoCliente(Long clienteId, Pageable pageable) {
