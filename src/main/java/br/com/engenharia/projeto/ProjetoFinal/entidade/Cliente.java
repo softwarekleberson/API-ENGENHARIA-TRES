@@ -9,7 +9,6 @@ import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCliente;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroCobranca;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroConfirmarSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEmail;
-import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEndereco;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroEntrega;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroSenha;
 import br.com.engenharia.projeto.ProjetoFinal.dtos.DadosCadastroTelefone;
